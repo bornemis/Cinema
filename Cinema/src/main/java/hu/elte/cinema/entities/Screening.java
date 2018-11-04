@@ -19,11 +19,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 /**
  *
@@ -58,7 +61,8 @@ public class Screening {
     @OneToMany(mappedBy = "screening")
     private List<Chair> chairs;
 
-   /* @OneToOne(mappedBy = "screening", cascade = CascadeType.ALL, 
-              fetch = FetchType.LAZY, optional = false)
-    private Room room;*/
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnore
+    private Room room;
 }

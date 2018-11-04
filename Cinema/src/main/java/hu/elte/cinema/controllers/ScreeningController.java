@@ -6,11 +6,14 @@
 package hu.elte.cinema.controllers;
 
 import hu.elte.cinema.entities.Chair;
+import hu.elte.cinema.entities.Room;
 import hu.elte.cinema.entities.Screening;
 import hu.elte.cinema.entities.User;
 import hu.elte.cinema.repositories.ScreeningRepository;
 import hu.elte.cinema.repositories.ChairRepository;
+import hu.elte.cinema.repositories.RoomRepository;
 import hu.elte.cinema.security.AuthenticatedUser;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +36,8 @@ public class ScreeningController {
     
     @Autowired
     private ScreeningRepository screeningRepository;
+    @Autowired
+    private RoomRepository roomRepository;
     @Autowired
     private ChairRepository chairRepository;
     @Autowired
@@ -134,4 +139,16 @@ public class ScreeningController {
     return ResponseEntity.notFound().build();
 }
             }
+
+    @GetMapping("/{id}/rooms")
+    public ResponseEntity<Room> rooms
+            (@PathVariable Integer id) {
+        Optional<Screening> screening = screeningRepository.findById(id);
+        if (screening.isPresent()) {
+            return ResponseEntity.ok(screening.get().getRoom());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+ 
 }

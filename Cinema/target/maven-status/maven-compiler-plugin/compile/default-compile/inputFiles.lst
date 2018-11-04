@@ -1,11 +1,16 @@
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\entities\Chair.java
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\controllers\RoomController.java
+D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\security\AuthenticatedUser.java
+D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\security\WebSecurityConfig.java
+D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\security\MyUserDetailsService.java
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\repositories\RoomRepository.java
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\controllers\ChairController.java
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\entities\Movie.java
+D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\entities\User.java
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\repositories\ChairRepository.java
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\entities\Room.java
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\repositories\ScreeningRepository.java
+D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\repositories\UserRepository.java
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\CinemaApplication.java
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\controllers\MovieController.java
 D:\Barbikell\IK\Alkalmazasok_fejlesztese\Cinema\Cinema\src\main\java\hu\elte\cinema\entities\Screening.java

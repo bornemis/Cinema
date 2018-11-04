@@ -36,15 +36,21 @@ public class ChairController {
         if (role.equals(User.Role.ADMIN)) {
         return ResponseEntity.ok(chairRepository.findAll());
     }else{
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(chairRepository.findAllByUser(user));
         }
     }
     @GetMapping("/{id}")
     public ResponseEntity<Chair> get(@PathVariable Integer id) {
+        User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if (role.equals(User.Role.ADMIN)) {
         Optional<Chair> chair = chairRepository.findById(id);
         if (chair.isPresent()) {
             return ResponseEntity.ok(chair.get());
         } else {
+            return ResponseEntity.notFound().build();
+        }
+        }else{
             return ResponseEntity.notFound().build();
         }
     }

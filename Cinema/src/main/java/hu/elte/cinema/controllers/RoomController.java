@@ -7,9 +7,11 @@ package hu.elte.cinema.controllers;
 
 import hu.elte.cinema.entities.Chair;
 import hu.elte.cinema.entities.Room;
+import hu.elte.cinema.entities.Screening;
 import hu.elte.cinema.repositories.ChairRepository;
 import hu.elte.cinema.repositories.MovieRepository;
 import hu.elte.cinema.repositories.RoomRepository;
+import hu.elte.cinema.repositories.ScreeningRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +32,8 @@ public class RoomController {
     private RoomRepository roomRepository;
     @Autowired
     private ChairRepository chairRepository;
-    
+    @Autowired
+    private ScreeningRepository screeningRepository;
     @GetMapping("")
     public ResponseEntity<Iterable<Room>> getAll() {
         return ResponseEntity.ok(roomRepository.findAll());
@@ -97,6 +100,30 @@ public class RoomController {
             chair.setRoom(room);
             return ResponseEntity.ok(
                 chairRepository.save(chair));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/{id}/screenings")
+    public ResponseEntity<Iterable<Screening>> screenings
+            (@PathVariable Integer id) {
+        Optional<Room> room = roomRepository.findById(id);
+        if (room.isPresent()) {
+            return ResponseEntity.ok(room.get().getScreenings());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @PostMapping("/{id}/screenings")
+    public ResponseEntity<Screening> insertScreening
+            (@PathVariable Integer id,
+             @RequestBody Screening screening) {
+        Optional<Room> oRoom = roomRepository.findById(id);
+        if (oRoom.isPresent()) {
+            Room room = oRoom.get();
+            screening.setRoom(room);
+            return ResponseEntity.ok(
+                screeningRepository.save(screening));
         } else {
             return ResponseEntity.notFound().build();
         }

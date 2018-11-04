@@ -39,16 +39,16 @@ public class Movie {
     @Column
     @NotNull
     private String plot;
-    @Column(name="DATE_OF_REGISTRATION", updatable=false)
+    @Column(name="DATE_OF_REGISTRATION",columnDefinition="varchar(1000)", updatable=false)
     @CreationTimestamp
     private LocalDateTime dateOfRegistration;
     @Column(name="DURATION_IN_MIN")
     @NotNull
     private int durationInMin;
-    @Column(name="POSTER_LINK", columnDefinition="varchar(100) default ''")
-    private String posterLink="";
-    @Column(name="TRAILER_LINK", columnDefinition="varchar(100) default ''")
-    private String trailerLink="";
+    @Column(name="POSTER", columnDefinition="blob")
+    private byte[] poster;
+    @Column(name="TRAILER", columnDefinition="blob")
+    private byte[] trailer;
     @Column(columnDefinition="varchar(20) default 'Meg nem ertekelt.'")
     private String rating="Meg nem ertekelt."; 
     @OneToMany(mappedBy = "movie")
