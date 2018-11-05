@@ -35,18 +35,18 @@
 | * [JUnit] | Egységteszt keretrendszer a JAVA nyelvhez. |
 ## Szerepkörök
 ### Nézők:
-	- Moziműsor megtekintése
-	- Filmek leírásának megtekintése
-	- Jegy(ek) rendelése
-	- Jegy tulajdonságainak testreszabása (Felnőtt/Diák)
-	- Tetszőleges hely kiválasztása (az adott moziterem kapacitásának, és az addig lefoglalt helyek figyelembe vételével)
-	- Foglalás véglegesítése (név és e-mail cím megadásával)
+- Moziműsor megtekintése
+- Filmek leírásának megtekintése
+- Jegy(ek) rendelése
+- Jegy tulajdonságainak testreszabása (Felnőtt/Diák)
+- Tetszőleges hely kiválasztása (az adott moziterem kapacitásának, és az addig lefoglalt helyek figyelembe vételével)
+- Foglalás véglegesítése (név és e-mail cím megadásával)
 ### Alkalmazottak:
-	 - Előadások meghirdetése
-	 - Foglalások megtekintése és kezelése
-	 - Új film felvitele az adatai megadásával
-	 - Filmek módosítása, törlése
-	 - Új vetítés meghirdetése
+ - Előadások meghirdetése
+ - Foglalások megtekintése és kezelése
+- Új film felvitele az adatai megadásával
+- Filmek módosítása, törlése
+- Új vetítés meghirdetése
 	 
    [h2]: <http://www.h2database.com/html/main.html>
    [JPA]: <https://www.tutorialspoint.com/jpa/>
