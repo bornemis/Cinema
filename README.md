@@ -52,9 +52,9 @@
 A project a NetBeans nevű fejlesztői környezetben készült a Maven Project, mely egy olyan fejlesztői eszköz, amivel könnyen lehet felhasználni más modulokat/plug-in-eket, és leszedi az ehhez szükséges dependencyket(függőségeket), valamint a Spring Boot felhasználásával, mely egy olyan eszköz, amellyel könnyen és gyorsan lehet prototípusokat létrehozni. Továbbá felhasználtuk a h2 adatbázis motort is a projectben, mely Java SQL adatbázist vezényel, illetve a Lombok nevű plug-in-t, aminek köszönhetően nem kell gettereket, settereket írni, valamint összehasonlító(equals) metódusokat.
 
 ## Adatbázis terv:
-![alt text](http://url/to/img.png)
+![alt text](Cinema/erDiagram.png)
 ## Alkalmazott könyvtárstruktúra bemutatása:
-![alt text](http://url/to/img.png)
+![alt text](Cinema/packageDiagram.png)
 
 A forrás fájlok a cinema nevű főkönyvtárban találhatók, mely több alkönyvtárra ágazik szét:
  - controllers
@@ -104,12 +104,12 @@ A „movies/{id]/screenings” végpontra érkezik a kérés, ezt a Controller e
 ### screenings metódus:
 Megkeresi a filmet a film azonosítója (id) szerint, ha talált az adott azonosítóval filmet, akkor, a ResponseEntity ok metódusának segítségével visszaküldi a filmhez tartozó vetítéseket, ha nem, akkor pedig egy nem talált válasz entitást fog buildelni, amit visszaküld a ResponseEntity notFound metódusával.
 
-![alt text](http://url/to/img.png)
+![alt text](Cinema/screenings.png)
 
 ### insertScreening metódus:
 Megkeresi a filmet a film azonosítója (id) szerint, ha talált az adott azonosítóval filmet, akkor a paraméterben kapott Screening objekutmnak beállítja az adott adott azonosítójú filmet, és a ResponseEntity ok metódusának segítségével elmenti a screeningRepository-ba (tehát a Screenings táblába) az adott vetítést, ha nincs az adott azonosítóval film, akkor pedig a ResponseEntity notFound metódusával egy nem talált válasz entitást fog buildelni.
 
-![alt text](http://url/to/img.png)
+![alt text](Cinema/insertScreening.png)
 
 ## Fontosabb Specifikumok:
 A chairs táblában az összes adatot csak az admin tudja megnézni, movies táblába adatot felvinni, törölni és módosítani is csak az admin tud, illetve a screenings és a rooms táblába felvinni, módosítani és törölni is csak az admin tud. A guest csak meg tudja nézni a vetítések, illetve a filmek listáját, a user foglalni is tud, és le tudja kérni a saját foglalásainak adatait.
