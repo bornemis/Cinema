@@ -52,9 +52,9 @@
 A project a NetBeans nevű fejlesztői környezetben készült a Maven Project, mely egy olyan fejlesztői eszköz, amivel könnyen lehet felhasználni más modulokat/plug-in-eket, és leszedi az ehhez szükséges dependencyket(függőségeket), valamint a Spring Boot felhasználásával, mely egy olyan eszköz, amellyel könnyen és gyorsan lehet prototípusokat létrehozni. Továbbá felhasználtuk a h2 adatbázis motort is a projectben, mely Java SQL adatbázist vezényel, illetve a Lombok nevű plug-in-t, aminek köszönhetően nem kell gettereket, settereket írni, valamint összehasonlító(equals) metódusokat.
 
 ## Adatbázis terv:
-![alt text](https://github.com/bornemis/Cinema/blob/master/erDiagram.png)
+![Tervezett adatbázis struktúra](https://github.com/bornemis/Cinema/blob/master/erDiagram.png)
 ## Alkalmazott könyvtárstruktúra bemutatása:
-![alt text](https://github.com/bornemis/Cinema/blob/master/packageDiagram.png)
+![Alkalmazott könyvtárstruktúra](https://github.com/bornemis/Cinema/blob/master/packageDiagram.png)
 
 A forrás fájlok a cinema nevű főkönyvtárban találhatók, mely több alkönyvtárra ágazik szét:
  - controllers
@@ -104,15 +104,37 @@ A „movies/{id]/screenings” végpontra érkezik a kérés, ezt a Controller e
 ### screenings metódus:
 Megkeresi a filmet a film azonosítója (id) szerint, ha talált az adott azonosítóval filmet, akkor, a ResponseEntity ok metódusának segítségével visszaküldi a filmhez tartozó vetítéseket, ha nem, akkor pedig egy nem talált válasz entitást fog buildelni, amit visszaküld a ResponseEntity notFound metódusával.
 
-![alt text](https://github.com/bornemis/Cinema/blob/master/screenings.png)
+![screenings végpont leírása](https://github.com/bornemis/Cinema/blob/master/screenings.png)
 
 ### insertScreening metódus:
 Megkeresi a filmet a film azonosítója (id) szerint, ha talált az adott azonosítóval filmet, akkor a paraméterben kapott Screening objekutmnak beállítja az adott adott azonosítójú filmet, és a ResponseEntity ok metódusának segítségével elmenti a screeningRepository-ba (tehát a Screenings táblába) az adott vetítést, ha nincs az adott azonosítóval film, akkor pedig a ResponseEntity notFound metódusával egy nem talált válasz entitást fog buildelni.
 
-![alt text](https://github.com/bornemis/Cinema/blob/master/insertScreening.png)
+![insertScreening végpont leírása](https://github.com/bornemis/Cinema/blob/master/insertScreening.png)
 
 ## Fontosabb Specifikumok:
 A chairs táblában az összes adatot csak az admin tudja megnézni, movies táblába adatot felvinni, törölni és módosítani is csak az admin tud, illetve a screenings és a rooms táblába felvinni, módosítani és törölni is csak az admin tud. A guest csak meg tudja nézni a vetítések, illetve a filmek listáját, a user foglalni is tud, és le tudja kérni a saját foglalásainak adatait.
+
+### Szerepkörök és funkciók kapcsolata
+
+![Adminisztrátóri funkciók](https://github.com/bornemis/Cinema/blob/master/adminUseCase.png)
+![Felhasználói funkciók](https://github.com/bornemis/Cinema/blob/master/userUseCase.png)
+![Vendég funkciók](https://github.com/bornemis/Cinema/blob/master/guestUseCase.png)
+
+### Kliens oldali fejlesztői környezet bemutatása
+
+A kliens oldali fejlesztés Visual Studio Code környezetben történt. Felhasználtuk az AngularJS-t, amely egy struktúrális szerkezetet nyújt a dinamikus webes alkalmazásokhoz. Engedélyezi, hogy HTML-t lehessen használni a template-ek nyelvéhez, de ennek a kiterjesztését is, hogy a komponenseket árnyaltabban tudjuk leírni, továbbá a JavaScryptet és a TypeScyptet is, illetve a css-t is. A css a kinézetért felelős, a TypeScrypt, illetve a Javascrypt pedig a logikáért, a html pedig a különböző elemek elrendezéséért a megjelenő felületen.
+
+### Kliens oldali könyvtárszerkezet
+
+![Kliens oldali könyvtárszerkezet](https://github.com/bornemis/Cinema/blob/master/clientPackageDiagram.png)
+
+### Felületi tervek, oldalvázlatok
+
+![Tervezett főoldal](https://github.com/bornemis/Cinema/blob/master/mainPagePlan.png)
+![Tervezett vetítések listája](https://github.com/bornemis/Cinema/blob/master/screeningListPlan.png)
+![Tervezett vetítések listája felhasználóként belépve](https://github.com/bornemis/Cinema/blob/master/screeningListUserPlan.png)
+![Tervezett filmek listája](https://github.com/bornemis/Cinema/blob/master/movieListPlan.png)
+![Tervezett új foglalás megvalósítása](https://github.com/bornemis/Cinema/blob/master/createNewLendingPlan.png)
 
    [h2]: <http://www.h2database.com/html/main.html>
    [JPA]: <https://www.tutorialspoint.com/jpa/>
