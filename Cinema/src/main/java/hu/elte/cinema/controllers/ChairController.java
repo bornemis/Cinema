@@ -24,37 +24,47 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/chairs")
 public class ChairController {
-    
+
     @Autowired
     private ChairRepository chairRepository;
     @Autowired
     private AuthenticatedUser authenticatedUser;
+
     @GetMapping("")
     public ResponseEntity<Iterable<Chair>> getAll() {
         User user = authenticatedUser.getUser();
         User.Role role = user.getRole();
         if (role.equals(User.Role.ADMIN)) {
-        return ResponseEntity.ok(chairRepository.findAll());
-    }else{
+            return ResponseEntity.ok(chairRepository.findAll());
+        } else {
             return ResponseEntity.ok(chairRepository.findAllByUser(user));
         }
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Chair> get(@PathVariable Integer id) {
         User user = authenticatedUser.getUser();
         User.Role role = user.getRole();
-        if (role.equals(User.Role.ADMIN)) {
-        Optional<Chair> chair = chairRepository.findById(id);
-        if (chair.isPresent()) {
-            return ResponseEntity.ok(chair.get());
+        if (role.equals(User.Role.ADMIN) || role.equals(User.Role.USER)) {
+            Optional<Chair> chair = chairRepository.findById(id);
+            if (chair.isPresent()) {
+                if(role.equals(User.Role.ADMIN)){
+                return ResponseEntity.ok(chair.get());
+                }else{
+                    if(chair.get().getUser().getUserName().equals(user.getUserName())){
+                        return ResponseEntity.ok(chair.get());
+                    }else{
+                        return ResponseEntity.badRequest().build();
+                    }
+                }
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } else {
-            return ResponseEntity.notFound().build();
-        }
-        }else{
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().build();
         }
     }
-    
+
     @PostMapping("")
     public ResponseEntity<Chair> post(@RequestBody Chair chair) {
         User user = authenticatedUser.getUser();
@@ -62,30 +72,43 @@ public class ChairController {
         Chair savedMovie = chairRepository.save(chair);
         return ResponseEntity.ok(savedMovie);
     }
+
     /*
     modositas, mi alapjan modositunk, melyik vegponton leszek
     path-ból kiolvassa az id-t, a htttp uzenetből kiolvassa az issue objectuomot,
     beadandónál a pathVariable az egyenlő-e, mint az issue id-ja, ha nem, akk badrequest hiba
-    */
+     */
     @PutMapping("/{id}")
-    public ResponseEntity<Chair> update(@PathVariable Integer id, @RequestBody Chair chair){
-        Optional<Chair> oChair = chairRepository.findById(id);
-        if (oChair.isPresent()) {
-            chair.setId(id); //igy nem kell lekezelni, hogy a pathVariable és az issue variable-je egyenlő-e
-            return ResponseEntity.ok(chairRepository.save(chair));
+    public ResponseEntity<Chair> update(@PathVariable Integer id, @RequestBody Chair chair) {
+        User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if (role.equals(User.Role.ADMIN)) {
+            Optional<Chair> oChair = chairRepository.findById(id);
+            if (oChair.isPresent()) {
+                chair.setId(id); //igy nem kell lekezelni, hogy a pathVariable és az issue variable-je egyenlő-e
+                return ResponseEntity.ok(chairRepository.save(chair));
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().build();
         }
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Chair> delete(@PathVariable Integer id){
-    Optional<Chair> oChair = chairRepository.findById(id);
-        if (oChair.isPresent()) {
-            chairRepository.deleteById(id);
-            return ResponseEntity.ok().build(); //ha az ok()-nak nincs paramétere, akkor build()-et kell utána írni!
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-}
-}
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Chair> delete(@PathVariable Integer id) {
+        User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if (role.equals(User.Role.ADMIN)) {
+            Optional<Chair> oChair = chairRepository.findById(id);
+            if (oChair.isPresent()) {
+                chairRepository.deleteById(id);
+                return ResponseEntity.ok().build(); //ha az ok()-nak nincs paramétere, akkor build()-et kell utána írni!
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+}

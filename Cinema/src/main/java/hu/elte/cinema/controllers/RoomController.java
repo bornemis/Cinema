@@ -8,10 +8,12 @@ package hu.elte.cinema.controllers;
 import hu.elte.cinema.entities.Chair;
 import hu.elte.cinema.entities.Room;
 import hu.elte.cinema.entities.Screening;
+import hu.elte.cinema.entities.User;
 import hu.elte.cinema.repositories.ChairRepository;
 import hu.elte.cinema.repositories.MovieRepository;
 import hu.elte.cinema.repositories.RoomRepository;
 import hu.elte.cinema.repositories.ScreeningRepository;
+import hu.elte.cinema.security.AuthenticatedUser;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,8 @@ public class RoomController {
     private ChairRepository chairRepository;
     @Autowired
     private ScreeningRepository screeningRepository;
+    @Autowired
+    private AuthenticatedUser authenticatedUser;
     @GetMapping("")
     public ResponseEntity<Iterable<Room>> getAll() {
         return ResponseEntity.ok(roomRepository.findAll());
@@ -41,18 +45,30 @@ public class RoomController {
     
     @GetMapping("/{id}")
     public ResponseEntity<Room> get(@PathVariable Integer id) {
+        User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if(role.equals(User.Role.ADMIN)){
         Optional<Room> room = roomRepository.findById(id);
         if (room.isPresent()) {
             return ResponseEntity.ok(room.get());
         } else {
             return ResponseEntity.notFound().build();
         }
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
     
     @PostMapping("")
     public ResponseEntity<Room> post(@RequestBody Room room) {
+        User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if(role.equals(User.Role.ADMIN)){
         Room savedRoom = roomRepository.save(room);
         return ResponseEntity.ok(savedRoom);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
     /*
     modositas, mi alapjan modositunk, melyik vegponton leszek
@@ -61,6 +77,9 @@ public class RoomController {
     */
     @PutMapping("/{id}")
     public ResponseEntity<Room> update(@PathVariable Integer id, @RequestBody Room room){
+        User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if(role.equals(User.Role.ADMIN)){
         Optional<Room> oRoom = roomRepository.findById(id);
         if (oRoom.isPresent()) {
             room.setId(id); //igy nem kell lekezelni, hogy a pathVariable és az issue variable-je egyenlő-e
@@ -68,9 +87,15 @@ public class RoomController {
         } else {
             return ResponseEntity.notFound().build();
         }
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Room> delete(@PathVariable Integer id){
+        User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if(role.equals(User.Role.ADMIN)){
     Optional<Room> oMovie = roomRepository.findById(id);
         if (oMovie.isPresent()) {
             roomRepository.deleteById(id);
@@ -78,15 +103,24 @@ public class RoomController {
         } else {
             return ResponseEntity.notFound().build();
         }
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
 }
     @GetMapping("/{id}/chairs")
     public ResponseEntity<Iterable<Chair>> chairs
             (@PathVariable Integer id) {
+                User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if(role.equals(User.Role.ADMIN)){
         Optional<Room> room = roomRepository.findById(id);
         if (room.isPresent()) {
             return ResponseEntity.ok(room.get().getChairs());
         } else {
             return ResponseEntity.notFound().build();
+        }
+            }else{
+            return ResponseEntity.badRequest().build();
         }
     }
             
@@ -94,6 +128,9 @@ public class RoomController {
     public ResponseEntity<Chair> insertChair
             (@PathVariable Integer id,
              @RequestBody Chair chair) {
+                 User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if(role.equals(User.Role.ADMIN)){
         Optional<Room> oRoom = roomRepository.findById(id);
         if (oRoom.isPresent()) {
             Room room = oRoom.get();
@@ -103,21 +140,33 @@ public class RoomController {
         } else {
             return ResponseEntity.notFound().build();
         }
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
     @GetMapping("/{id}/screenings")
     public ResponseEntity<Iterable<Screening>> screenings
             (@PathVariable Integer id) {
+                 User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if(role.equals(User.Role.ADMIN)){
         Optional<Room> room = roomRepository.findById(id);
         if (room.isPresent()) {
             return ResponseEntity.ok(room.get().getScreenings());
         } else {
             return ResponseEntity.notFound().build();
         }
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
     @PostMapping("/{id}/screenings")
     public ResponseEntity<Screening> insertScreening
             (@PathVariable Integer id,
              @RequestBody Screening screening) {
+                 User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if(role.equals(User.Role.ADMIN)){
         Optional<Room> oRoom = roomRepository.findById(id);
         if (oRoom.isPresent()) {
             Room room = oRoom.get();
@@ -128,5 +177,9 @@ public class RoomController {
             return ResponseEntity.notFound().build();
         }
     }
+         else{
+            return ResponseEntity.badRequest().build();
+        }
+}
 }
 

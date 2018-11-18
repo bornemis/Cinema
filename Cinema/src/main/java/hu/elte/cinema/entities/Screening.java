@@ -11,6 +11,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -53,6 +55,16 @@ public class Screening {
     @Column(name="MOVIE_DURATION_IN_MIN")
     @NotNull
     private int movieDurationInMin;
+    @Column(name="D_TYPE")
+    private String dType="2D";
+    @Column(name="SCREENING_LANGUAGE")
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private ScreeningLanguage screeningLanguage;
+    @Column
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private SubscriptionType subscription;
     @ManyToOne
     //2 tábla közötti kapcsolatot biztosítja
     @JoinColumn
@@ -65,4 +77,10 @@ public class Screening {
     @JoinColumn
     @JsonIgnore
     private Room room;
+    public enum SubscriptionType{
+        HUN, ENG, NONE;
+    }
+    public enum ScreeningLanguage{
+        HUN, ENG;
+    }
 }
