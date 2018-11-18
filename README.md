@@ -159,7 +159,7 @@ A chairs táblában az összes adatot csak az admin tudja megnézni, movies táb
 ![Tervezett filmek listája](https://github.com/bornemis/Cinema/blob/master/movieListPlan.png)
 ![Tervezett új foglalás megvalósítása](https://github.com/bornemis/Cinema/blob/master/createNewLendingPlan.png)
 
-# IssueTrackerClient
+# CinemaClient
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.5.
 
