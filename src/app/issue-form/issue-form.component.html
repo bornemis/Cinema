@@ -1,0 +1,6 @@
+<form [formGroup]="issueForm">
+  <mat-form-field>
+    <input matInput placeholder="Place" formControlName="place">
+  </mat-form-field>
+</form>
+{{issueForm.value | json}}

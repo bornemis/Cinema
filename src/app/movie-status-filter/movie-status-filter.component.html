@@ -1,0 +1,8 @@
+<mat-button-toggle-group [value]="selectedStatus"
+  (change)="onFilterChange($event)"
+>
+  <mat-button-toggle value="">All</mat-button-toggle>
+  <mat-button-toggle value="ACTUAL">Actual</mat-button-toggle>
+  <mat-button-toggle value="COMING">Coming</mat-button-toggle>
+</mat-button-toggle-group>
+{{ selectedStatus }}

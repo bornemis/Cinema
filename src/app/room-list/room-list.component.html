@@ -1,0 +1,12 @@
+<h2>Termek listája</h2>
+  <mat-nav-list>
+    <a *ngFor="let room of rooms" mat-list-item (click)="selectedRoom = room"
+    [class.selected]="room === selectedRoom">
+      <h3 matLine>{{ room.roomName }}</h3>
+      <small matLine>
+        <mat-icon>numberOfRows</mat-icon>{{room.numberOfRows}}
+        <mat-icon>numberOfColumns</mat-icon>{{room.numberOfColumns}}
+        <mat-icon>availablePlaces</mat-icon>{{room.availablePlaces}}
+      </small>
+    </a>
+  </mat-nav-list>

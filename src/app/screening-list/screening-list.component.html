@@ -1,0 +1,25 @@
+<h2>Vetítések listája</h2>
+
+<d-filter [status]="selectedDType"
+  (change)="onFilterChange($event)"
+></d-filter>
+<p>
+  {{ selectedScreening | json }}
+  </p>
+  <mat-nav-list>
+    <a *ngFor="let screening of filteredScreenings" mat-list-item
+      (click)="selectedScreening = screening" 
+      [class.selected]="screening === selectedScreening"
+    >
+    <mat-icon *ngIf="screening.dType === '2D'"   matListIcon style="color: rgb(0, 60, 255)">filter_2</mat-icon>
+    <mat-icon *ngIf="screening.dType === '3D'" matListIcon style="color: lightskyblue">filter_3</mat-icon>
+    <mat-icon *ngIf="screening.dType === '4DX'" matListIcon style="color: rgb(34, 32, 129)">filter_4</mat-icon>
+      <h3 matLine>{{ screening.movieTitle }}</h3>
+      <h3 matLine>{{ screening.startTime }}</h3>
+      <small matLine>
+        <mat-icon>dType</mat-icon> {{ screening.dType }}
+        <mat-icon>screeningLanguage</mat-icon> {{ screening.screeningLanguage }}
+        <mat-icon>subscirption</mat-icon> {{ screening.subscription }}
+      </small>
+    </a>
+  </mat-nav-list>
