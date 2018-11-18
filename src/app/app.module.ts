@@ -16,7 +16,6 @@ import {
 import { MainPageComponent } from './main-page/main-page.component';
 import { RoutingModule } from './routing/routing.module';
 import { MovieStatusFilterComponent } from './movie-status-filter/movie-status-filter.component';
-import { IssueFormComponent } from './issue-form/issue-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { ScreeningListComponent } from './screening-list/screening-list.component';
@@ -30,7 +29,6 @@ import { ChairStatusFilterComponent } from './chair-status-filter/chair-status-f
     AppComponent,
     MainPageComponent,
     MovieStatusFilterComponent,
-    IssueFormComponent,
     MovieListComponent,
     ScreeningListComponent,
     DFilterComponent,
