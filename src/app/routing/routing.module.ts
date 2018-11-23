@@ -2,16 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MovieListComponent } from "../movie-list/movie-list.component";
-import { MainPageComponent } from '../main-page/main-page.component';
+//import { MainPageComponent } from '../main-page/main-page.component';
 import { ScreeningListComponent } from '../screening-list/screening-list.component';
 import { RoomListComponent } from '../room-list/room-list.component';
 import { ChairListComponent } from '../chair-list/chair-list.component';
+import { MovieEditComponent } from '../movie-edit/movie-edit.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: MainPageComponent
-  },
+  //{
+  //  path: '',
+   // component: MainPageComponent
+ // },
   {
     path: 'movies',
     component: MovieListComponent
@@ -27,7 +28,11 @@ const routes: Routes = [
   {
     path: 'chairs',
     component: ChairListComponent
-  }
+  },
+  {
+    path: 'movies/:id/edit',
+    component: MovieEditComponent
+  },
   // {
   //   path: 'issues/new',
   //   component: IssueFormComponent

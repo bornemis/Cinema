@@ -2,8 +2,8 @@ export class Movie {
     id=null;
     title: string = '';
     director: string = '';
-    movie_type: string='';
-    age_limit: string='';
+    movieType: string[];
+    ageLimit: string='';
     plot: string = '';
     releaseDate: Date= new Date();
     durationInMin: number=0;

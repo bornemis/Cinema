@@ -11,7 +11,8 @@ import {
   MatListModule,
   MatButtonToggleModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatSelectModule
 } from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
 import { RoutingModule } from './routing/routing.module';
@@ -23,6 +24,9 @@ import { DFilterComponent } from './d-filter/d-filter.component';
 import { RoomListComponent } from './room-list/room-list.component';
 import { ChairListComponent } from './chair-list/chair-list.component';
 import { ChairStatusFilterComponent } from './chair-status-filter/chair-status-filter.component';
+import { MovieFormComponent } from './movie-form/movie-form.component';
+import { MovieEditComponent } from './movie-edit/movie-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ import { ChairStatusFilterComponent } from './chair-status-filter/chair-status-f
     DFilterComponent,
     RoomListComponent,
     ChairListComponent,
-    ChairStatusFilterComponent
+    ChairStatusFilterComponent,
+    MovieFormComponent,
+    MovieEditComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,8 @@ import { ChairStatusFilterComponent } from './chair-status-filter/chair-status-f
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

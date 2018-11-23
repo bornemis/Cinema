@@ -11,6 +11,7 @@
   <a *ngFor="let movie of filteredMovies" mat-list-item
     (click)="selectedMovie = movie" 
     [class.selected]="movie === selectedMovie"
+    [routerLink]="['/movies', movie.id, 'edit']"
   >
   <mat-icon *ngIf="movie.status === 'COMING'"   matListIcon style="color: rgb(0, 60, 255)">star_border</mat-icon>
   <mat-icon *ngIf="movie.status === 'ACTUAL'" matListIcon style="color: lightskyblue">star</mat-icon>
@@ -25,4 +26,4 @@
   </a>
 </mat-nav-list>
 
-<!--<issue-form></issue-form>-->
+<!--<movie-form></movie-form>-->
