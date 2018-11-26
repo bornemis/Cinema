@@ -1,0 +1,56 @@
+<form [formGroup]="chairForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="A foglaló ügyfél neve" formControlName="customerName"
+      required
+      pattern="^(Dr\.\s|dr\.\s)?[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]{1,}(\s[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]{1,}){0,}"
+    >
+    <mat-error *ngIf="customerName.invalid && (customerName.dirty || customerName.touched) && customerName.errors.required">
+      A név megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="customerName.invalid && (customerName.dirty || customerName.touched) && customerName.errors.pattern">
+      A névnek helyes formátumúnak kell lennie!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="A foglaló ügyfél e-mail címe" formControlName="customerEmail"
+      required
+      pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}"
+    >
+    <mat-error *ngIf="customerEmail.invalid && (customerEmail.dirty || customerEmail.touched) && customerEmail.errors.required">
+      Az e-mail cím megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="customerEmail.invalid && (customerEmail.dirty || customerEmail.touched) && customerEmail.errors.pattern">
+      Az e-mail címnek helyes formátumúnak kell lennie!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Jegy típusa" formControlName="ticketType"
+      required
+    >
+    <mat-option value="STUDENT">Diák</mat-option>
+    <mat-option value="ADULT">Felnőtt</mat-option>
+  </mat-select>
+    <mat-error *ngIf="ticketType.invalid && (ticketType.dirty || ticketType.touched) && ticketType.errors.required">
+      A jegy típusának megadása kötelező!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Státusz" formControlName="status"
+      required
+    >
+    <mat-option value="PAYED">Kifizetett</mat-option>
+    <mat-option value="RENTED">Lefoglalt</mat-option>
+  </mat-select>
+    <mat-error *ngIf="ticketType.invalid && (ticketType.dirty || ticketType.touched) && ticketType.errors.required">
+      A jegy típusának megadása kötelező!
+    </mat-error>
+  </mat-form-field>
+  <button mat-flat-button color="primary" 
+    type="submit"
+    [disabled]="chairForm.invalid"  
+  >Mentés</button>
+
+</form>
+{{chair | json}}
+{{chairForm.value | json}}
+{{chairForm.valid | json}}

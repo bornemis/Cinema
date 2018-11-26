@@ -1,0 +1,58 @@
+<form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="Terem név" formControlName="roomName"
+      required
+      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ1-9][a-záéőóúűüöí0-9-]*(\s[A-ZÁÉŐÓÚŰÜÖÍ1-9][a-záéőóúűüöí0-9-]*)*"
+    >
+    <mat-error *ngIf="roomName.invalid && (roomNamedirty || roomName.touched) && roomName.errors.required">
+      A terem nevének megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="roomName.invalid && (roomName.dirty || roomName.touched) && roomName.errors.pattern">
+      A terem névnek helyes formátumúnak kell lennie!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Sorok száma" formControlName="numberOfRows"
+      required
+      pattern="^[1-9][0-9]?"
+    >
+    <mat-error *ngIf="numberOfRows.invalid && (numberOfRows.dirty || numberOfRows.touched) && numberOfRows.errors.required">
+      A sorok számának megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="numberOfRows.invalid && (numberOfRows.dirty || numberOfRows.touched) && numberOfRows.errors.pattern">
+      A sorok számának helyes formátumúnak kell lennie!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Oszlopok száma" formControlName="numberOfColumns"
+      required
+      pattern="^[1-9][0-9]?"
+    >
+    <mat-error *ngIf="numberOfColumns.invalid && (numberOfColumns.dirty || numberOfColumns.touched) && numberOfColumns.errors.required">
+      Az oszlopok számának megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="numberOfColumns.invalid && (numberOfColumns.dirty || numberOfColumns.touched) && numberOfColumns.errors.pattern">
+      Az oszlopok számának helyes formátumúnak kell lennie!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Terem kapacitása" formControlName="availablePlaces"
+      required
+      pattern="^[1-9][0-9]{0,1,2}"
+    >
+    <mat-error *ngIf="availablePlaces.invalid && (availablePlaces.dirty || availablePlaces.touched) && availablePlaces.errors.required">
+      A terem kapacitásának megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="availablePlaces.invalid && (availablePlaces.dirty || availablePlaces.touched) && availablePlaces.errors.pattern">
+      A terem kapacitásának helyes formátumúnak kell lennie!
+    </mat-error>
+  </mat-form-field>
+  <button mat-flat-button color="primary" 
+    type="submit"
+    [disabled]="roomForm.invalid"  
+  >Mentés</button>
+
+</form>
+{{room | json}}
+{{roomForm.value | json}}
+{{roomForm.valid | json}}

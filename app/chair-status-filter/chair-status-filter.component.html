@@ -1,0 +1,8 @@
+<mat-button-toggle-group [value]="selectedStatus"
+  (change)="onFilterChange($event)"
+>
+  <mat-button-toggle value="">Összes</mat-button-toggle>
+  <mat-button-toggle value="RENTED">Lefoglalt</mat-button-toggle>
+  <mat-button-toggle value="PAYED">Fizetett</mat-button-toggle>
+</mat-button-toggle-group>
+{{ selectedStatus }}
