@@ -1,0 +1,23 @@
+<h1>A kiválasztott foglalás adatai</h1>
+
+<dl *ngIf="chair">
+  <dt>A foglaló ügyfél neve</dt>
+  <dd>{{chair.customerName}}</dd>
+  <dt>A foglaló ügyfél e-mail címe</dt>
+  <dd>{{chair.customerEmail}}</dd>
+  <dt>A terem neve</dt>
+  <dd>{{chair.roomName}}</dd>
+  <dt>A sor sorszáma</dt>
+  <dd>{{chair.rowNumber}}</dd>
+  <dt>A szék sorszáma a sorban</dt>
+  <dd>{{chair.columnNumber}}</dd>
+  <dt>A jegy típusa</dt>
+  <dd>{{chair.ticketType}}</dd>
+  <dt>A foglalás státusza</dt>
+  <dd>{{chair.status}}</dd>
+</dl>
+
+<p>
+<a mat-flat-button color="primary" [routerLink]="['/chairs', chair.id, 'edit']" *ngIf="showEdit">Szerkesztés</a>
+<button ng-click="onFormDelete(chair)" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
+</p>

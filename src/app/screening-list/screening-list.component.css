@@ -10,3 +10,6 @@ h2 {
   a.selected {
     background-color: rgb(0, 81, 255);
   }
+  button{
+    background-color: green;
+  }

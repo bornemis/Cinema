@@ -3,13 +3,11 @@
 <d-filter [status]="selectedDType"
   (change)="onFilterChange($event)"
 ></d-filter>
-<p>
-  {{ selectedScreening | json }}
-  </p>
   <mat-nav-list>
     <a *ngFor="let screening of filteredScreenings" mat-list-item
       (click)="selectedScreening = screening" 
       [class.selected]="screening === selectedScreening"
+      [routerLink]="['/screenings', screening.id]">
     >
     <mat-icon *ngIf="screening.dType === '2D'"   matListIcon style="color: rgb(0, 60, 255)">filter_2</mat-icon>
     <mat-icon *ngIf="screening.dType === '3D'" matListIcon style="color: lightskyblue">filter_3</mat-icon>
@@ -23,3 +21,5 @@
       </small>
     </a>
   </mat-nav-list>
+  <button mat-button routerLink="/screenings/add" *ngIf="showAdd">Új vetítés hozzáadása</button>
+

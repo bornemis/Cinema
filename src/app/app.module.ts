@@ -26,7 +26,17 @@ import { ChairListComponent } from './chair-list/chair-list.component';
 import { ChairStatusFilterComponent } from './chair-status-filter/chair-status-filter.component';
 import { MovieFormComponent } from './movie-form/movie-form.component';
 import { MovieEditComponent } from './movie-edit/movie-edit.component';
-
+import { ChairFormComponent } from './chair-form/chair-form.component';
+import { ChairEditComponent } from './chair-edit/chair-edit.component';
+import { RoomFormComponent } from './room-form/room-form.component';
+import { RoomEditComponent } from './room-edit/room-edit.component';
+import { ScreeningFormComponent } from './screening-form/screening-form.component';
+import { ScreeningEditComponent } from './screening-edit/screening-edit.component';
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RoomDetailComponent } from './room-detail/room-detail.component';
+import { ChairDetailComponent } from './chair-detail/chair-detail.component';
+import { ScreeningDetailComponent } from './screening-detail/screening-detail.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +50,17 @@ import { MovieEditComponent } from './movie-edit/movie-edit.component';
     ChairListComponent,
     ChairStatusFilterComponent,
     MovieFormComponent,
-    MovieEditComponent
+    MovieEditComponent,
+    ChairFormComponent,
+    ChairEditComponent,
+    RoomFormComponent,
+    RoomEditComponent,
+    ScreeningFormComponent,
+    ScreeningEditComponent,
+    MovieDetailComponent,
+    RoomDetailComponent,
+    ChairDetailComponent,
+    ScreeningDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +74,8 @@ import { MovieEditComponent } from './movie-edit/movie-edit.component';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

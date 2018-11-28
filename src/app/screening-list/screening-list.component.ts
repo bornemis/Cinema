@@ -1,58 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Screening } from '../screening';
-
+import { ScreeningService } from '../screening.service';
 @Component({
   selector: 'screening-list',
   templateUrl: './screening-list.component.html',
   styleUrls: ['./screening-list.component.css']
 })
 export class ScreeningListComponent implements OnInit {
-  screenings: Screening[] = [
-    {
-      id: 1,
-      movieTitle: "Micsoda nő",
-      roomName: "16",
-      startTime: '13:30',
-      movieDurationInMin: 125,
-      dType: "2D",
-      screeningLanguage: 'ENG',
-      subscription: 'HUN',
-    },
-    {
-      id: 2,
-      movieTitle: "Peppermint: A bosszú angyala",
-      roomName: "20",
-      startTime: '17:00',
-      movieDurationInMin: 101,
-      dType: "3D",
-      screeningLanguage: 'HUN',
-      subscription: 'NONE',
-    },{
-        id: 3,
-        movieTitle: "A Keresztapa",
-        roomName: "20",
-        startTime: '20:30',
-        movieDurationInMin: 125,
-        dType: "2D",
-        screeningLanguage: 'ENG',
-        subscription: 'NONE',
-    },{
-        id: 4,
-        movieTitle: "A Keresztapa",
-        roomName: "16",
-        startTime: '15:30',
-        movieDurationInMin: 125,
-        dType: "2D",
-        screeningLanguage: 'HUN',
-        subscription: 'ENG',
-    }
-  ]
+  screenings: Screening[] = []
   filteredScreenings = [];
   selectedDType = '2D';
   selectedScreening = null;
-  constructor() { }
+  @Input() showAdd = true;
+  constructor(private screeningService: ScreeningService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.screenings = await this.screeningService.getScreenings();
     this.filterScreenings();
   }
   filterScreenings() {

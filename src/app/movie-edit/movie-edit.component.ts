@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../movie.service';
 import { Movie } from '../movie';
 import { Location } from '@angular/common';
@@ -11,23 +11,35 @@ import { Location } from '@angular/common';
 })
 export class MovieEditComponent implements OnInit {
 
-  id: number
-  movie: Movie = null;
+  id: number=null;
+  movie: Movie = new Movie();
+  title='Új film felvitele'
 
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) { }
 
-  ngOnInit() {
-    this.id = +this.route.snapshot.paramMap.get('id');
-    this.movie = this.movieService.getMovie(this.id);
+  async ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.id = +id;
+      this.movie= await this.movieService.getMovie(this.id);
+      this.title = 'A kiválasztott film szerkesztése';
+    }
   }
 
-  onFormSave(movie: Movie) {
-    this.movieService.modifyMovie(this.id, movie)
-    this.location.back();
+  async onFormSave(movie: Movie) {
+    if (this.id) {
+      await this.movieService.modifyMovie(this.id, movie)
+      this.location.back();
+    } else {
+      await this.movieService.addMovie(movie);
+      this.router.navigate(['/movies']);
+    }
+  }
   }
 
-}
+

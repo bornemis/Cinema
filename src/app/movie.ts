@@ -5,7 +5,7 @@ export class Movie {
     movieType: string[];
     ageLimit: string='';
     plot: string = '';
-    releaseDate: Date= new Date();
+    releaseDate= '';
     durationInMin: number=0;
     status: string='';
     posterLink: string = '';

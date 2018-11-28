@@ -1,0 +1,93 @@
+<form [formGroup]="screeningForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="Film címe" formControlName="movieTitle"
+      required
+      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-]+(\s[A-ZÁÉŐÓÚŰÜÖÍa-záéőóúűüöí0-9-]+)*(\s[1-9][0-9]*\.?)?$"
+    >
+    <mat-error *ngIf="movieTitle.invalid && (movieTitle.dirty || movieTitle.touched) && movieTitle.errors.required">
+      A film címének megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="movieTitle.invalid && (movieTitle.dirty || movieTitle.touched) && movieTitle.errors.pattern">
+      A film címének helyes formátumúnak kell lennie!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Terem neve" formControlName="roomName"
+      required
+      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ1-9][a-záéőóúűüöí0-9-]*(\s[A-ZÁÉŐÓÚŰÜÖÍ1-9][a-záéőóúűüöí0-9-]*)*$"
+    >
+    <mat-error *ngIf="roomName.invalid && (roomName.dirty || roomName.touched) && roomName.errors.required">
+      A terem nevének megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="roomName.invalid && (roomName.dirty || roomName.touched) && roomName.errors.pattern">
+      A terem nevének helyes formátumúnak kell lennie!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Vetítés kezdete" formControlName="startTime"
+      required
+      pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+    >
+    <mat-error *ngIf="startTime.invalid && (startTime.dirty || startTime.touched) && startTime.errors.required">
+      A vetítés kezdetének megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="startTime.invalid && (startTime.dirty || startTime.touched) && startTime.errors.pattern">
+      A vetítés kezdetének helyes formátumúnak kell lennie!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Időtartam" formControlName="movieDurationInMin"
+      required
+      pattern="^[1-9]\d{1,2}$"
+    >
+    <mat-error *ngIf="movieDurationInMin.invalid && (movieDurationInMin.dirty || movieDurationInMin.touched) && movieDurationInMin.errors.required">
+      Az időtartam megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="movieDurationInMin.invalid && (movieDurationInMin.dirty || movieDurationInMin.touched) && movieDurationInMin.errors.pattern">
+      Az időtartamnak helyes formátumúnak kell lennie!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+      <mat-select placeholder="A vetítés fajtája" formControlName="dType"
+        required
+      >
+        <mat-option value="2D">2D</mat-option>
+        <mat-option value="3D">3D</mat-option>
+        <mat-option value="4DX">4DX</mat-option>
+      </mat-select>
+      <mat-error *ngIf="dType.invalid && (dType.dirty || dType.touched) && dType.errors.required">
+        A vetítés fajtájának megadása kötelező!
+      </mat-error>
+    </mat-form-field>
+      <mat-form-field>
+    <mat-select placeholder="Nyelv" formControlName="screeningLanguage"
+      required
+    >
+    <mat-option value="HUN">Magyar</mat-option>
+    <mat-option value="ENG">Angol</mat-option>
+  </mat-select>
+    <mat-error *ngIf="screeningLanguage.invalid && (screeningLanguage.dirty || screeningLanguage.touched) && screeningLanguage.errors.required">
+      A nyelv megadása kötelező!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+      <mat-select placeholder="Felirat" formControlName="subscription"
+        required
+      >
+      <mat-option value="HUN">Magyar</mat-option>
+      <mat-option value="ENG">Angol</mat-option>
+      <mat-option value="NONE">Nincs felirat</mat-option>
+    </mat-select>
+      <mat-error *ngIf="subscription.invalid && (subscription.dirty || subscription.touched) && subscription.errors.required">
+        A felirat megadása kötelező!
+      </mat-error>
+    </mat-form-field>
+  <button mat-flat-button color="primary" 
+    type="submit"
+    [disabled]="screeningForm.invalid"  
+  >Mentés</button>
+
+</form>
+{{screening | json}}
+{{screeningForm.value | json}}
+{{screeningForm.valid | json}}

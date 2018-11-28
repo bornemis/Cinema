@@ -1,0 +1,17 @@
+<h1>A kiválasztott terem adatai</h1>
+
+<dl *ngIf="room">
+  <dt>Név</dt>
+  <dd>{{room.roomName}}</dd>
+  <dt>Sorok száma:</dt>
+  <dd>{{room.numberOfRows}}</dd>
+  <dt>Székek száma egy sorban</dt>
+  <dd>{{room.numberOfColumns}}</dd>
+  <dt>Összes hely</dt>
+  <dd>{{room.availablePlaces}}</dd>
+</dl>
+
+<p>
+<a mat-flat-button color="primary" [routerLink]="['/rooms', room.id, 'edit']" *ngIf="showEdit">Szerkesztés</a>
+<button ng-click="onFormDelete(room)" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
+</p>

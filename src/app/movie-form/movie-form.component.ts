@@ -10,12 +10,12 @@ import { Movie } from '../movie';
 export class MovieFormComponent implements OnInit, OnChanges {
   movieTypeList: string[] = ['Akció', 'Animáció', 'Családi', 'Dokumentum', 'Dráma', 'Életrajzi', 'Fantasy', 'Háborús', 'Horror', 'Kaland', 'Krimi', 'Misztikus', 'Romantikus', 'Sci-Fi', 'Thriller', 'Gengszter', 'Történelmi', 'Vígjáték', 'Western', 'Zenés'];
   movieForm = this.fb.group({
-    title: ['', [Validators.required, Validators.pattern(/^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-]+(\s[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-]+)*(\s[1-9][0-9]*\.?)?/)]],
-    director: ['', [Validators.required, Validators.pattern(/^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]+(\s[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]+)*/)]],
+    title: ['', [Validators.required, Validators.pattern(/^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-]+(\s[A-ZÁÉŐÓÚŰÜÖÍa-záéőóúűüöí0-9-]+)*(\s[1-9][0-9]*\.?)?$/)]],
+    director: ['', [Validators.required, Validators.pattern(/^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]+(\s[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]+)*$/)]],
     movieType: ['',[Validators.required]],
     ageLimit: ['',[Validators.required]],
     plot: [''],
-    releaseDate: ['',[Validators.required, Validators.pattern(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)]],
+    releaseDate: ['',[Validators.required, Validators.pattern(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/)]],
     durationInMin: ['', [Validators.required, Validators.pattern(/[1-9]\d{2}/)]],
     status: ['', [Validators.required]],
     posterLink:['',[Validators.required]],

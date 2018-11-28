@@ -1,0 +1,23 @@
+<h1>A kiválasztott vetítés adatai</h1>
+
+<dl *ngIf="screening">
+  <dt>A film címe</dt>
+  <dd>{{screening.movieTitle}}</dd>
+  <dt>A terem neve: </dt>
+  <dd>{{screening.roomName}}</dd>
+  <dt>A vetítés kezdete</dt>
+  <dd>{{screening.startTime}}</dd>
+  <dt>Hossz</dt>
+  <dd>{{screening.movieDurationInMin}}</dd>
+  <dt>Vetítés típusa</dt>
+  <dd>{{screening.dType}}</dd>
+  <dt>Nyelv</dt>
+  <dd>{{screening.screeningLanguage}}</dd>
+  <dt>Felirat</dt>
+  <dd>{{screening.subscription}} perc</dd>
+</dl>
+
+<p>
+<a mat-flat-button color="primary" [routerLink]="['/screenings', screening.id, 'edit']" *ngIf="showEdit">Szerkesztés</a>
+<button ng-click="onFormDelete(screening)" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
+</p>

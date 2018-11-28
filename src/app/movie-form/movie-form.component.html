@@ -1,8 +1,8 @@
 <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
   <mat-form-field>
-    <input matInput placeholder="Cim" formControlName="title"
+    <input matInput placeholder="Cím" formControlName="title"
       required
-      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-]+(\s[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-]+)*(\s[1-9][0-9]*\.?)?"
+      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-]+(\s[A-ZÁÉŐÓÚŰÜÖÍa-záéőóúűüöí0-9-]+)*(\s[1-9][0-9]*\.?)?$"
     >
     <mat-error *ngIf="title.invalid && (title.dirty || title.touched) && title.errors.required">
       A cím megadása kötelező!
@@ -14,7 +14,7 @@
   <mat-form-field>
     <input matInput placeholder="Rendező" formControlName="director"
       required
-      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]{1,}(\s[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]{1,}){0,}"
+      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]{1,}(\s[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]{1,}){0,}$"
     >
     <mat-error *ngIf="director.invalid && (director.dirty || director.touched) && director.errors.required">
       A rendező megadása kötelező!
@@ -50,7 +50,7 @@
   <mat-form-field>
     <input matInput placeholder="Megjelenés dátuma" formControlName="releaseDate"
       required
-      pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
+      pattern="^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$"
     >
     <mat-error *ngIf="releaseDate.invalid && (releaseDate.dirty || releaseDate.touched) && releaseDate.errors.required">
       A megjelenés dátuma megadása kötelező!
@@ -72,10 +72,10 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Status" formControlName="status"
+    <mat-select placeholder="Státusz" formControlName="status"
       required
     >
-      <mat-option value="COMING">Jön</mat-option>
+      <mat-option value="COMING">Hamarosan</mat-option>
       <mat-option value="ACTUAL">Már vászonon</mat-option>
     </mat-select>
     <mat-error *ngIf="status.invalid && (status.dirty || status.touched) && status.errors.required">
@@ -83,7 +83,7 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Poster" formControlName="posterLink"
+    <input matInput placeholder="Poszter" formControlName="posterLink"
     required
     >
     <mat-error *ngIf="posterLink.invalid && (posterLink.dirty || posterLink.touched) && posterLink.errors.required">

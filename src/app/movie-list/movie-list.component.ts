@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service';
 @Component({
@@ -12,11 +12,11 @@ export class MovieListComponent implements OnInit {
   filteredMovies = [];
   selectedStatus = 'ACTUAL';
   selectedMovie = null;
-
+  @Input() showAdd = true;
   constructor(private movieService: MovieService) { }
 
-  ngOnInit() {
-    this.movies = this.movieService.getMovies();
+  async ngOnInit() {
+    this.movies = await this.movieService.getMovies();
     this.filterMovies();
   }
 
