@@ -6,15 +6,11 @@
 package hu.elte.cinema.controllers;
 
 import hu.elte.cinema.entities.Chair;
-import hu.elte.cinema.entities.Room;
 import hu.elte.cinema.entities.Screening;
 import hu.elte.cinema.entities.User;
 import hu.elte.cinema.repositories.ScreeningRepository;
 import hu.elte.cinema.repositories.ChairRepository;
-import hu.elte.cinema.repositories.RoomRepository;
 import hu.elte.cinema.security.AuthenticatedUser;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +33,6 @@ public class ScreeningController {
     
     @Autowired
     private ScreeningRepository screeningRepository;
-    @Autowired
-    private RoomRepository roomRepository;
     @Autowired
     private ChairRepository chairRepository;
     @Autowired
@@ -67,7 +61,7 @@ public class ScreeningController {
             Screening savedScreening = screeningRepository.save(screening);
             return ResponseEntity.ok(savedScreening);
         }else{
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
         
     }
@@ -89,7 +83,7 @@ public class ScreeningController {
                 return ResponseEntity.notFound().build();
             }
         }else{
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
     }
     @DeleteMapping("/{id}")
@@ -105,32 +99,15 @@ public class ScreeningController {
             return ResponseEntity.notFound().build();
         }
         }else{
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
 }
     @GetMapping("/{id}/chairs")
     public ResponseEntity<Iterable<Chair>> chairs
             (@PathVariable Integer id) {
-                User user = authenticatedUser.getUser();
-        User.Role role = user.getRole();
         Optional<Screening> screening = screeningRepository.findById(id);
         if (screening.isPresent()) {
-            if(role.equals(User.Role.ADMIN) || role.equals(User.Role.USER)){
-            if(role.equals(User.Role.ADMIN)){
             return ResponseEntity.ok(screening.get().getChairs());
-            }else{
-                List<Chair> possibleChairs=screening.get().getChairs();
-                List<Chair> appropriateChairs=new ArrayList<>();
-                for(Chair pChair: possibleChairs){
-                    if(pChair.getUser().getUserName().equals(user.getUserName())){
-                        appropriateChairs.add(pChair);
-                    }
-                }
-                return ResponseEntity.ok(appropriateChairs);
-            }
-            }else{
-                return ResponseEntity.badRequest().build();
-            }
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -140,6 +117,9 @@ public class ScreeningController {
     public ResponseEntity<Chair> insertChair
             (@PathVariable Integer id,
              @RequestBody Chair chair) {
+        User user = authenticatedUser.getUser();
+        User.Role role = user.getRole();
+        if (role.equals(User.Role.ADMIN)){
         Optional<Screening> oScreening = screeningRepository.findById(id);
         if (oScreening.isPresent()) {
             Screening screening = oScreening.get();
@@ -150,23 +130,8 @@ public class ScreeningController {
             return ResponseEntity.notFound().build();
         }
     }
-            
-
-    @GetMapping("/{id}/rooms")
-    public ResponseEntity<Room> rooms
-            (@PathVariable Integer id) {
-                 User user = authenticatedUser.getUser();
-        User.Role role = user.getRole();
-        if(role.equals(User.Role.ADMIN)){
-        Optional<Screening> screening = screeningRepository.findById(id);
-        if (screening.isPresent()) {
-            return ResponseEntity.ok(screening.get().getRoom());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-        }else{
-            return ResponseEntity.badRequest().build();
-        }
-    }
- 
+            else{
+    return ResponseEntity.notFound().build();
+}
+            }
 }

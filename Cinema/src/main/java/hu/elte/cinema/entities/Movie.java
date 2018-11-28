@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,28 +36,18 @@ public class Movie {
     @Column
     @NotNull
     private String director;
-    @Column (name="MOVIE_TYPE")
-    @NotNull
-    private String movieType;
-    @Column (name="AGE_LIMIT")
-    @NotNull
-    private String ageLimit="";
     @Column
     @NotNull
     private String plot;
-    @Column(name="RELEASE_DATE",columnDefinition="varchar(1000)", updatable=false)
+    @Column(name="DATE_OF_REGISTRATION", updatable=false)
     @CreationTimestamp
-    private LocalDateTime releaseDate;
+    private LocalDateTime dateOfRegistration;
     @Column(name="DURATION_IN_MIN")
     @NotNull
     private int durationInMin;
-    @Column
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private MovieStatus status;
-    @Column(name="POSTER", columnDefinition="varchar2(500)")
+    @Column(name="POSTER_LINK", columnDefinition="varchar(100) default ''")
     private String posterLink="";
-    @Column(name="TRAILER", columnDefinition="varchar2(500)")
+    @Column(name="TRAILER_LINK", columnDefinition="varchar(100) default ''")
     private String trailerLink="";
     @Column(columnDefinition="varchar(20) default 'Meg nem ertekelt.'")
     private String rating="Meg nem ertekelt."; 
@@ -68,7 +56,4 @@ public class Movie {
     @ManyToMany
     @JoinTable
     private List<Chair> chairs;
-    public enum MovieStatus{
-        COMING, ACTUAL
-    }
 }

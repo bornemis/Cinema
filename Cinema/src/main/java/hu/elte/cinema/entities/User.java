@@ -32,7 +32,7 @@ public class User {
     @Column(name="USER_NAME",nullable = false)
     private String userName;
     
-    @Column(columnDefinition="varchar(200) default ''")
+    @Column(columnDefinition="varchar(100) default ''")
     private String password="";
     
     @Column(nullable = false)
@@ -43,7 +43,7 @@ public class User {
     private Role role;
     
     public enum Role {
-        GUEST, ADMIN, USER
+        GUEST, ADMIN
     }
     
     @OneToMany(mappedBy = "user")
