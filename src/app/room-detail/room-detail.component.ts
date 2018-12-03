@@ -24,7 +24,7 @@ export class RoomDetailComponent implements OnInit {
       this.room =await this.roomService.getRoom(this.id);
     }
   }
-  async onFormDelete(room: Room) {
+  async onFormDelete() {
       await this.roomService.deleteRoom(this.id);
       this.router.navigate(['/rooms']);
   }

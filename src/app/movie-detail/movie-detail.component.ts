@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { MovieService } from '../movie.service';
 import { Movie } from '../movie';
+import { DomSanitizer} from '@angular/platform-browser';
+import { AuthService } from '../auth.service';
  @Component({
   selector: 'movie-detail',
   templateUrl: './movie-detail.component.html',
@@ -13,7 +15,9 @@ export class MovieDetailComponent implements OnInit {
     constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer,
+    private authService: AuthService
   ) { }
   @Input() showEdit=true;
   @Input() showDelete=true;
@@ -24,7 +28,7 @@ export class MovieDetailComponent implements OnInit {
       this.movie =await this.movieService.getMovie(this.id);
     }
   }
-  async onFormDelete(movie: Movie) {
+  async onFormDelete() {
       await this.movieService.deleteMovie(this.id);
       this.router.navigate(['/movies']);
   }

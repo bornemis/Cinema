@@ -13,5 +13,7 @@
 
 <p>
 <a mat-flat-button color="primary" [routerLink]="['/rooms', room.id, 'edit']" *ngIf="showEdit">Szerkesztés</a>
-<button ng-click="onFormDelete(room)" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
+<button (click)="onFormDelete()" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
 </p>
+
+

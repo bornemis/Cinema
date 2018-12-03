@@ -19,5 +19,5 @@
 
 <p>
 <a mat-flat-button color="primary" [routerLink]="['/screenings', screening.id, 'edit']" *ngIf="showEdit">Szerkesztés</a>
-<button ng-click="onFormDelete(screening)" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
+<button (click)="onFormDelete()" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
 </p>

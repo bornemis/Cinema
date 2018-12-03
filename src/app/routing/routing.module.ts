@@ -13,6 +13,8 @@ import { MovieEditComponent } from '../movie-edit/movie-edit.component';
 import { ChairEditComponent } from '../chair-edit/chair-edit.component';
 import { RoomEditComponent } from '../room-edit/room-edit.component';
 import { ScreeningEditComponent } from '../screening-edit/screening-edit.component';
+import { AuthGuard } from '../auth.guard';
+import { LoginComponent } from '../login/login.component';
 const routes: Routes = [
   {
     path: '',
@@ -28,15 +30,24 @@ const routes: Routes = [
   },
   {
     path: 'rooms',
-    component: RoomListComponent
+    component: RoomListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'chairs',
-    component: ChairListComponent
+    component: ChairListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'movies/:id/edit',
-    component: MovieEditComponent
+    component: MovieEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'movies/:id',
@@ -44,52 +55,79 @@ const routes: Routes = [
   },
   {
     path: 'screenings/:id',
-    component: ScreeningDetailComponent
+    component: ScreeningDetailComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'chairs/:id',
-    component: ChairDetailComponent
+    component: ChairDetailComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'rooms/:id',
-    component: RoomDetailComponent
+    component: RoomDetailComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'chairs/:id/edit',
-    component: ChairEditComponent
+    component: ChairEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'rooms/:id/edit',
-    component: RoomEditComponent
+    component: RoomEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'screenings/:id/edit',
-    component: ScreeningEditComponent
+    component: ScreeningEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'movies/add',
-    component: MovieEditComponent
+    component: MovieEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'screenings/add',
-    component: ScreeningEditComponent
+    component: ScreeningEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'rooms/add',
-    component: RoomEditComponent
+    component: RoomEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'chairs/add',
-    component: ChairEditComponent
+    component: ChairEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
-  // {
-  //   path: 'issues/new',
-  //   component: IssueFormComponent
-  // },
-  // {
-  //   path: 'issues/:id',
-  //   component: IssueDetailComponent
-  // },
 ];
 
 @NgModule({

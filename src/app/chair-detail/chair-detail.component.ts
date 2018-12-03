@@ -24,7 +24,7 @@ export class ChairDetailComponent implements OnInit {
       this.chair =await this.chairService.getChair(this.id);
     }
   }
-  async onFormDelete(chair: Chair) {
+  async onFormDelete() {
       await this.chairService.deleteChair(this.id);
       this.router.navigate(['/chairs']);
   }

@@ -19,10 +19,11 @@
   <dt>Leírás</dt>
   <dd>{{movie.plot}}</dd>
   <dt>Előzetes</dt>
-  <dd><iframe width="560" height="315" src="{{'https://www.youtube.com/embed/'+movie.trailerLink}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></dd>
+  <dd><iframe width="560" height="315" [src]="sanitizer.bypassSecurityTrustResourceUrl(movie.trailerLink)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"  allowfullscreen></iframe></dd>
 </dl>
 
 <p>
-<a mat-flat-button color="primary" [routerLink]="['/movies', movie.id, 'edit']" *ngIf="showEdit">Szerkesztés</a>
-<button ng-click="onFormDelete(movie)" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
+<a mat-flat-button color="primary" [routerLink]="['/movies', movie.id, 'edit']">Szerkesztés</a>
+<button (click)="onFormDelete()" mat-flat-button color="primary"  >Törlés</button>
 </p>
+<!--[showEdit]="authService.user.role === 'ADMIN'">Szerkesztés-->

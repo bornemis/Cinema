@@ -24,7 +24,7 @@ export class ScreeningDetailComponent implements OnInit {
       this.screening =await this.screeningService.getScreening(this.id);
     }
   }
-  async onFormDelete(screening: Screening) {
+  async onFormDelete() {
       await this.screeningService.deleteScreening(this.id);
       this.router.navigate(['/screenings']);
   }
