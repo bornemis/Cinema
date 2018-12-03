@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -20,6 +22,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 /**
  *
@@ -48,7 +54,7 @@ public class Room {
     private int availablePlaces;
     @OneToMany(mappedBy = "room")
     private List<Chair> chairs;
-   /* @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roomName")
-    private Screening screening;*/
+    @OneToMany(mappedBy="room")
+    private List<Screening> screenings;
+
 }
