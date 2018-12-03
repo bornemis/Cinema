@@ -1,81 +1,97 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
+import { PageContainerComponent } from './page-container/page-container.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { PostListComponent } from './post-list/post-list.component';
+import { SearchComponent } from './search/search.component';
+import { SearchResultPageComponent } from './search-result-page/search-result-page.component';
+import { TagPageComponent } from './tag-page/tag-page.component';
+import { TagCloudComponent } from './tag-cloud/tag-cloud.component';
+import { TagListComponent } from './tag-list/tag-list.component';
+import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
+import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
+import { EditPostPageComponent } from './edit-post-page/edit-post-page.component';
+import { ConfirmPostDeletionPageComponent } from './confirm-post-deletion-page/confirm-post-deletion-page.component';
+import { PostExistsService } from './post-exists.service';
+import { AuthorarizationService } from './authorarization.service';
 
-import {
-  MatToolbarModule, 
-  MatButtonModule, 
-  MatIconModule,
-  MatListModule,
-  MatButtonToggleModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatSelectModule
-} from '@angular/material';
-import { MainPageComponent } from './main-page/main-page.component';
-import { RoutingModule } from './routing/routing.module';
-import { MovieStatusFilterComponent } from './movie-status-filter/movie-status-filter.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MovieListComponent } from './movie-list/movie-list.component';
-import { ScreeningListComponent } from './screening-list/screening-list.component';
-import { DFilterComponent } from './d-filter/d-filter.component';
-import { RoomListComponent } from './room-list/room-list.component';
-import { ChairListComponent } from './chair-list/chair-list.component';
-import { ChairStatusFilterComponent } from './chair-status-filter/chair-status-filter.component';
-import { MovieFormComponent } from './movie-form/movie-form.component';
-import { MovieEditComponent } from './movie-edit/movie-edit.component';
-import { ChairFormComponent } from './chair-form/chair-form.component';
-import { ChairEditComponent } from './chair-edit/chair-edit.component';
-import { RoomFormComponent } from './room-form/room-form.component';
-import { RoomEditComponent } from './room-edit/room-edit.component';
-import { ScreeningFormComponent } from './screening-form/screening-form.component';
-import { ScreeningEditComponent } from './screening-edit/screening-edit.component';
-import { MovieDetailComponent } from './movie-detail/movie-detail.component';
-import { HttpClientModule } from '@angular/common/http';
-import { RoomDetailComponent } from './room-detail/room-detail.component';
-import { ChairDetailComponent } from './chair-detail/chair-detail.component';
-import { ScreeningDetailComponent } from './screening-detail/screening-detail.component';
+const routes: Routes = [
+  {
+    path: 'home',
+    component: HomePageComponent
+  },
+  {
+    path: 'about',
+    component: AboutPageComponent
+  },
+  {
+    path: 'search/:keywords',
+    component: SearchResultPageComponent
+  },
+  {
+    path: 'tag/:tag',
+    component: TagPageComponent
+  },
+  {
+    path: 'sign-in',
+    component: SignInPageComponent
+  },
+  {
+    path: 'sign-up',
+    component: SignUpPageComponent
+  },
+  {
+    path: 'post/:postNo/edit',
+    component: EditPostPageComponent
+  },
+  {
+    path: 'post/:postNo/confirm-delete',
+    component: ConfirmPostDeletionPageComponent,
+    canActivate: [PostExistsService, AuthorarizationService]
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: NotFoundPageComponent
+  }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent,
-    MovieStatusFilterComponent,
-    MovieListComponent,
-    ScreeningListComponent,
-    DFilterComponent,
-    RoomListComponent,
-    ChairListComponent,
-    ChairStatusFilterComponent,
-    MovieFormComponent,
-    MovieEditComponent,
-    ChairFormComponent,
-    ChairEditComponent,
-    RoomFormComponent,
-    RoomEditComponent,
-    ScreeningFormComponent,
-    ScreeningEditComponent,
-    MovieDetailComponent,
-    RoomDetailComponent,
-    ChairDetailComponent,
-    ScreeningDetailComponent
+    HeaderComponent,
+    PageContainerComponent,
+    SidebarComponent,
+    HomePageComponent,
+    AboutPageComponent,
+    NotFoundPageComponent,
+    PostListComponent,
+    SearchComponent,
+    SearchResultPageComponent,
+    TagPageComponent,
+    TagCloudComponent,
+    TagListComponent,
+    SignInPageComponent,
+    SignUpPageComponent,
+    EditPostPageComponent,
+    ConfirmPostDeletionPageComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    RoutingModule,
-    MatButtonToggleModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    HttpClientModule
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

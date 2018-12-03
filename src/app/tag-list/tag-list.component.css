@@ -1,0 +1,11 @@
+.badge {
+    margin: 0 4px;
+}
+
+.tag-container {
+    margin: 0 -4px;
+}
+
+.badge:hover {
+    cursor: pointer;
+}

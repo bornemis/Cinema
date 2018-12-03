@@ -1,0 +1,3 @@
+<div class="tag-container">
+  <span class="badge badge-secondary" *ngFor="let tag of tags | async" (click)="handleClick(tag)">{{ tag }}</span>
+</div>
