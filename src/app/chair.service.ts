@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Chair } from './chair';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
- const httpOptions = {
-  headers: new HttpHeaders({ 
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic YWRtaW46cGFzc3dvcmQ=', // admin/password
-  })
-};
+import { httpOptions } from "./auth.service";
 @Injectable({
   providedIn: 'root'
 })

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Screening } from '../screening';
 import { ScreeningService } from '../screening.service';
+import {AuthService} from '../auth.service';
+
 @Component({
   selector: 'screening-list',
   templateUrl: './screening-list.component.html',
@@ -12,7 +14,8 @@ export class ScreeningListComponent implements OnInit {
   selectedDType = '2D';
   selectedScreening = null;
   @Input() showAdd = true;
-  constructor(private screeningService: ScreeningService) { }
+  constructor(private screeningService: ScreeningService,
+    authService: AuthService) { }
 
   async ngOnInit() {
     this.screenings = await this.screeningService.getScreenings();
