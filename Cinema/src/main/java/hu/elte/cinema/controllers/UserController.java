@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import hu.elte.cinema.security.AuthenticatedUser;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin
@@ -24,7 +25,8 @@ public class UserController {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-    
+    @Autowired 
+    private AuthenticatedUser authenticatedUser;
     @Autowired
     private UserRepository userRepository;
 
@@ -41,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public ResponseEntity login(@RequestBody User user) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<User> login(@RequestBody User user) {
+        return ResponseEntity.ok(authenticatedUser.getUser());
     }
 }
