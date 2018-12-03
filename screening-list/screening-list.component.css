@@ -1,0 +1,15 @@
+h2 {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  small mat-icon {
+    font-size: smaller;
+    height: auto;
+    width: auto;
+  }
+  a.selected {
+    background-color: rgb(0, 81, 255);
+  }
+  button{
+    background-color: green;
+  }
