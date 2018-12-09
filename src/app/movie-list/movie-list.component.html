@@ -3,24 +3,27 @@
 <movie-status-filter [status]="selectedStatus"
   (change)="onFilterChange($event)"
 ></movie-status-filter>
-
+<div>
 <mat-nav-list>
   <a *ngFor="let movie of filteredMovies" mat-list-item
     (click)="selectedMovie = movie" 
     [class.selected]="movie === selectedMovie"
     [routerLink]="['/movies', movie.id]"
   >
-  <mat-icon *ngIf="movie.status === 'COMING'"   matListIcon style="color: rgb(0, 60, 255)">star_border</mat-icon>
-  <mat-icon *ngIf="movie.status === 'ACTUAL'" matListIcon style="color: lightskyblue">star</mat-icon>
+  <mat-icon *ngIf="movie.status === 'COMING'"   matListIcon style="color: rgb(13, 66, 13)">star_border</mat-icon>
+  <mat-icon *ngIf="movie.status === 'ACTUAL'" matListIcon style="color: rgb(64, 240, 79)">star</mat-icon>
     <h3 matLine>{{ movie.title }}</h3>
     <img matListAvatar src="{{'assets/'+movie.posterLink}}" alt="Poszter">
    <small matLine>
-      <mat-icon>director</mat-icon> {{ movie.director }}
-      <mat-icon>durationInMin</mat-icon> {{ movie.durationInMin }}
-      <mat-icon>dateOfRegistration</mat-icon> {{ movie.dateOfRegistration }}
-      <mat-icon>rating</mat-icon> {{ movie.rating }}
+       {{ movie.director }}
+       </small>
+       <small matLine>
+       {{ movie.durationInMin }} perc
+       {{ movie.dateOfRegistration }}
+       {{ movie.rating }} IMDb
     </small>
   </a>
 </mat-nav-list>
-<button mat-button routerLink="/movies/add" *ngIf="showAdd">Új film hozzáadássa</button>
+<a mat-flat-button [routerLink]="['/movies', 'add']" *ngIf="authService.isAdmin" class="buttons">Új film hozzáadása</a>
+</div>
 <!--<movie-form></movie-form>-->

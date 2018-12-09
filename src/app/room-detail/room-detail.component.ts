@@ -15,8 +15,7 @@ export class RoomDetailComponent implements OnInit {
     private roomService: RoomService,
     private router: Router
   ) { }
-  @Input() showEdit=true;
-  @Input() showDelete=true;
+ 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {

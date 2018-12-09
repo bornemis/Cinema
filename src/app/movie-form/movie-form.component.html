@@ -2,7 +2,7 @@
   <mat-form-field>
     <input matInput placeholder="Cím" formControlName="title"
       required
-      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-]+(\s[A-ZÁÉŐÓÚŰÜÖÍa-záéőóúűüöí0-9-]+)*(\s[1-9][0-9]*\.?)?$"
+      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-:]+(\s[A-ZÁÉŐÓÚŰÜÖÍa-záéőóúűüöí0-9-:]+)*(\s[1-9][0-9]*\.?)?$"
     >
     <mat-error *ngIf="title.invalid && (title.dirty || title.touched) && title.errors.required">
       A cím megadása kötelező!
@@ -24,11 +24,16 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Kategória" formControlName="movieType"
-      multiple required
+    <input matInput placeholder="Kategória" formControlName="movieType"
+      required
+      pattern="^(Akcio|Animacio|Csaladi|Dokumentum|Drama|Eletrajzi|Fantasy|Haborus|Horror|Kaland|Krimi|Misztikus|Romantikus|Sci-Fi|Thriller|Gengszter|Tortenelmi|Vigjatek|Western|Zenes)(,\s(Akcio|Animacio|Csaladi|Dokumentum|Drama|Eletrajzi|Fantasy|Haborus|Horror|Kaland|Krimi|Misztikus|Romantikus|Sci-Fi|Thriller|Gengszter|Tortenelmi|Vigjatek|Western|Zenes))*$"
     >
-    <mat-option *ngFor="let type of movieTypeList" [value]="type">{{type}}</mat-option>
-    </mat-select>
+    <mat-error *ngIf="movieType.invalid && (movieType.dirty || movieType.touched) && movieType.errors.required">
+      A film típusának megadása kötelező!
+    </mat-error>
+    <mat-error *ngIf="movieType.invalid && (movieType.dirty || movieType.touched) && movieType.errors.pattern">
+      A film típusának helyes formátumúnak kell lennie!
+    </mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-select placeholder="Korhatár" formControlName="ageLimit"
@@ -62,7 +67,7 @@
   <mat-form-field>
     <input matInput placeholder="Időtartam" formControlName="durationInMin"
       required
-      pattern="[1-9]\d{2}"
+      pattern="[1-9]\d{1,2}"
     >
     <mat-error *ngIf="durationInMin.invalid && (durationInMin.dirty || durationInMin.touched) && durationInMin.errors.required">
       Az időtartam megadása kötelező!
@@ -95,26 +100,16 @@
     >
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Értékelés (x/10)" formControlName="rating"
+    <input matInput placeholder="Értékelés (x/10)" formControlName="rating"
+    pattern ="^10$|[1-9](\.[0-9])?$|Meg nem ertekelt.$"
     >
-    <mat-option value="1">1</mat-option>
-    <mat-option value="2">2</mat-option>
-    <mat-option value="3">3</mat-option>
-    <mat-option value="4">4</mat-option>
-    <mat-option value="5">5</mat-option>
-    <mat-option value="6">6</mat-option>
-    <mat-option value="7">7</mat-option>
-    <mat-option value="8">8</mat-option>
-    <mat-option value="9">9</mat-option>
-    <mat-option value="10">10</mat-option>
-    </mat-select>
+    <mat-error *ngIf="rating.invalid && (durationInMin.dirty || rating.touched) && rating.errors.pattern">
+      Az ertékelésnek helyes formátumúnak kell lennie!
+    </mat-error>
   </mat-form-field>
-  <button mat-flat-button color="primary" 
+  <button mat-flat-button 
     type="submit"
     [disabled]="movieForm.invalid"  
   >Mentés</button>
 
 </form>
-{{movie | json}}
-{{movieForm.value | json}}
-{{movieForm.valid | json}}

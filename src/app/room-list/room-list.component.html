@@ -1,4 +1,5 @@
-<h2>Termek listája</h2>
+<h2>{{title}}</h2>
+<div>
   <mat-nav-list>
     <a *ngFor="let room of rooms" mat-list-item (click)="selectedRoom = room"
     [class.selected]="room === selectedRoom"
@@ -8,3 +9,4 @@
     </a>
   </mat-nav-list>
   <button mat-button routerLink="/rooms/add" *ngIf="showAdd">Új terem hozzáadása</button>
+</div>

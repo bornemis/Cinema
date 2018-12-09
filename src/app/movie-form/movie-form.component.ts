@@ -8,19 +8,18 @@ import { Movie } from '../movie';
   styleUrls: ['./movie-form.component.css']
 })
 export class MovieFormComponent implements OnInit, OnChanges {
-  movieTypeList: string[] = ['Akció', 'Animáció', 'Családi', 'Dokumentum', 'Dráma', 'Életrajzi', 'Fantasy', 'Háborús', 'Horror', 'Kaland', 'Krimi', 'Misztikus', 'Romantikus', 'Sci-Fi', 'Thriller', 'Gengszter', 'Történelmi', 'Vígjáték', 'Western', 'Zenés'];
   movieForm = this.fb.group({
-    title: ['', [Validators.required, Validators.pattern(/^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-]+(\s[A-ZÁÉŐÓÚŰÜÖÍa-záéőóúűüöí0-9-]+)*(\s[1-9][0-9]*\.?)?$/)]],
+    title: ['', [Validators.required, Validators.pattern(/^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-:]+(\s[A-ZÁÉŐÓÚŰÜÖÍa-záéőóúűüöí0-9-:]+)*(\s[1-9][0-9]*\.?)?$/)]],
     director: ['', [Validators.required, Validators.pattern(/^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]+(\s[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]+)*$/)]],
-    movieType: ['',[Validators.required]],
+    movieType: ['',[Validators.required, Validators.pattern(/^(Akcio|Animacio|Csaladi|Dokumentum|Drama|Eletrajzi|Fantasy|Haborus|Horror|Kaland|Krimi|Misztikus|Romantikus|Sci-Fi|Thriller|Gengszter|Tortenelmi|Vigjatek|Western|Zenes)(,\s(Akcio|Animacio|Csaladi|Dokumentum|Drama|Eletrajzi|Fantasy|Haborus|Horror|Kaland|Krimi|Misztikus|Romantikus|Sci-Fi|Thriller|Gengszter|Tortenelmi|Vigjatek|Western|Zenes))*$/)]],
     ageLimit: ['',[Validators.required]],
     plot: [''],
     releaseDate: ['',[Validators.required, Validators.pattern(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/)]],
-    durationInMin: ['', [Validators.required, Validators.pattern(/[1-9]\d{2}/)]],
+    durationInMin: ['', [Validators.required, Validators.pattern(/[1-9]\d{1,2}/)]],
     status: ['', [Validators.required]],
     posterLink:['',[Validators.required]],
     trailerLink: [''],
-    rating: ['']
+    rating: ['', [Validators.pattern(/^10$|[1-9](\.[0-9])?$|Meg nem ertekelt.$/)]]
   });
   @Input() movie: Movie;
   @Output() save = new EventEmitter<Movie>();
@@ -44,10 +43,12 @@ export class MovieFormComponent implements OnInit, OnChanges {
   ngOnInit() {}
   
   ngOnChanges() {
+ 
     this.movieForm.patchValue(this.movie);
   }
 
   onSubmit() {
+
     this.save.emit(
       Object.assign(new Movie(), this.movieForm.value)
     );

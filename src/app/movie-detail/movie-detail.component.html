@@ -1,5 +1,6 @@
+<html>
 <h1>A kiválasztott film adatai</h1>
-
+<div>
 <dl *ngIf="movie">
   <dt>Cím</dt>
   <dd>{{movie.title}}</dd>
@@ -19,11 +20,16 @@
   <dt>Leírás</dt>
   <dd>{{movie.plot}}</dd>
   <dt>Előzetes</dt>
+  
   <dd><iframe width="560" height="315" [src]="sanitizer.bypassSecurityTrustResourceUrl(movie.trailerLink)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"  allowfullscreen></iframe></dd>
-</dl>
+  </dl>
 
-<p>
-<a mat-flat-button color="primary" [routerLink]="['/movies', movie.id, 'edit']">Szerkesztés</a>
-<button (click)="onFormDelete()" mat-flat-button color="primary"  >Törlés</button>
+<p> 
+<a mat-flat-button color="primary" [routerLink]="['/movies',movie.id,'screenings']" >Vetítések listája</a>
+<a mat-flat-button color="primary" [routerLink]="['/movies',movie.id,'chairs']" *ngIf="authService.isLoggedIn" >Foglalások listája</a>
+<a mat-flat-button color="primary" [routerLink]="['/movies', movie.id, 'edit']" *ngIf="authService.isAdmin">Szerkesztés</a>
+<button (click)="onFormDelete()" mat-flat-button color="primary"  *ngIf="authService.isAdmin">Törlés</button>
 </p>
+</div>
 <!--[showEdit]="authService.user.role === 'ADMIN'">Szerkesztés-->
+</html>

@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { MovieService } from '../movie.service';
+import { AuthService } from '../auth.service';
 import { Movie } from '../movie';
 import { DomSanitizer} from '@angular/platform-browser';
-import { AuthService } from '../auth.service';
+//import { AuthService } from '../auth.service';
  @Component({
   selector: 'movie-detail',
   templateUrl: './movie-detail.component.html',
@@ -16,11 +17,12 @@ export class MovieDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private movieService: MovieService,
     private router: Router,
-    private sanitizer: DomSanitizer,
-    private authService: AuthService
+    private authService:AuthService,
+    private sanitizer: DomSanitizer
+    //private authService: AuthService
   ) { }
-  @Input() showEdit=true;
-  @Input() showDelete=true;
+
+
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -32,4 +34,5 @@ export class MovieDetailComponent implements OnInit {
       await this.movieService.deleteMovie(this.id);
       this.router.navigate(['/movies']);
   }
+
  }

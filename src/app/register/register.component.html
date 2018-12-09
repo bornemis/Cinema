@@ -1,5 +1,5 @@
 <html>
-<h1>Bejelentkezés</h1>
+<h1>Regisztráció</h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div *ngIf="message">
    {{ message }}
@@ -13,8 +13,14 @@
    <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
    <mat-error *ngIf="password.invalid">A jelszó megadsa kötelező!</mat-error>
  </mat-form-field>
+ <mat-form-field>
+  <input matInput placeholder="Jelszó újra" formControlName="passwordagain" required [type]="hidePassword ? 'password' : 'text'">
+  <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+  <mat-error *ngIf="password.invalid">A jelszó megadsa kötelező!</mat-error>
+</mat-form-field>
   <div>
-   <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid">Bejelentkezés</button>
+   <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid">Regisztráció</button>
  </div>
 </form>
 </html>
+

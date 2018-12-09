@@ -1,23 +1,29 @@
+<html>
 <h1>A kiválasztott vetítés adatai</h1>
-
+<div>
 <dl *ngIf="screening">
   <dt>A film címe</dt>
   <dd>{{screening.movieTitle}}</dd>
   <dt>A terem neve: </dt>
   <dd>{{screening.roomName}}</dd>
+  <dt>A vetítés dátuma</dt>
+  <dd>{{screening.screeningDate}}</dd>
   <dt>A vetítés kezdete</dt>
   <dd>{{screening.startTime}}</dd>
   <dt>Hossz</dt>
-  <dd>{{screening.movieDurationInMin}}</dd>
-  <dt>Vetítés típusa</dt>
-  <dd>{{screening.dType}}</dd>
+  <dd>{{screening.movieDurationInMin}} perc</dd>
   <dt>Nyelv</dt>
   <dd>{{screening.screeningLanguage}}</dd>
   <dt>Felirat</dt>
-  <dd>{{screening.subscription}} perc</dd>
+  <dd>{{screening.subscription}}</dd>
 </dl>
 
 <p>
-<a mat-flat-button color="primary" [routerLink]="['/screenings', screening.id, 'edit']" *ngIf="showEdit">Szerkesztés</a>
-<button (click)="onFormDelete()" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
+<a mat-flat-button color="primary" [routerLink]="['/screenings', screening.id, 'edit']" *ngIf="authService.isAdmin">Szerkesztés</a>
+<a mat-flat-button color="primary" [routerLink]="['/screenings', screening.id, 'chairs', 'add']" *ngIf="authService.isLoggedIn">Jegy foglalás</a>
+<a mat-flat-button color="primary" [routerLink]="['/screenings', screening.id, 'chairs']" *ngIf="authService.isLoggedIn">Vetítéshez tartozó foglalások</a>
+<a mat-flat-button color="primary" [routerLink]="['/screenings', screening.id, 'rooms']" *ngIf="authService.isAdmin">Vetítéshez tartozó terem</a>
+<button (click)="onFormDelete()" mat-flat-button color="primary" *ngIf="authService.isAdmin">Törlés</button>
 </p>
+</div>
+</html>

@@ -1,22 +1,24 @@
-<h2>Foglalások listája</h2>
+<h2>{{title}}</h2>
 
 <chair-status-filter [status]="selectedStatus"
   (change)="onFilterChange($event)"
-></chair-status-filter>
+*ngIf="authService.isAdmin"></chair-status-filter>
 
-
+<div>
 <mat-nav-list>
   <a *ngFor="let chair of filteredChairs" mat-list-item
     (click)="selectedChair = chair" 
     [class.selected]="chair === selectedChair"
     [routerLink]="['/chairs', chair.id]"
   >
-  <mat-icon *ngIf="chair.status === 'PAYED'"   matListIcon style="color: rgb(0, 60, 255)">attach_money</mat-icon>
-  <mat-icon *ngIf="chair.status === 'RENTED'" matListIcon style="color: lightskyblue">shopping_cart</mat-icon>
+  <mat-icon *ngIf="chair.status === 'PAYED'"   matListIcon style="color: rgb(13, 66, 13)">attach_money</mat-icon>
+  <mat-icon *ngIf="chair.status === 'RENTED'" matListIcon style="color: rgb(64, 240, 79)">shopping_cart</mat-icon>
     <h3 matLine>{{ chair.customerName }}</h3>
     <h3 matLine>{{ chair.customerEmail }}</h3>
     <h4 matLine>{{chair.roomName}} {{chair.movieTitle}} {{chair.status}}</h4>
   </a>
 </mat-nav-list>
-<button mat-button routerLink="/chairs/add">Jegy foglalás</button>
+</div>
+<!--<a mat-flat-button [routerLink]="['/screenings','add']" *ngIf="showAdd" class="buttons">Jegy foglalás</a>-->
+<!--<a mat-flat-button [routerLink]="['/movies',movie.id,'chairs', 'add']" *ngIf="showMovieChair" class="buttons">Jegy foglalás a kivalasztott filmhez</a>-->
 <!--<issue-form></issue-form>-->

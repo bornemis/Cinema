@@ -1,6 +1,12 @@
 form {
     padding: 12px;
+    background-color:white;
 }
-mat-form-field {
+.mat-form-field {
     width: 100%;
+
+}
+.mat-flat-button{
+    background-color:green;
+    color:white;
 }

@@ -1,5 +1,8 @@
 <h1>{{title}}</h1>
 <chair-form 
   [chair]="chair"
+  [showStatus]="authService.isAdmin"
+  [readOnly]="editable"
+  [readOnlyWhenEdit]="editableWhenEdit"
   (save)="onFormSave($event)"
 ></chair-form>

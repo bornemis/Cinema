@@ -1,9 +1,35 @@
 <form [formGroup]="chairForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-select placeholder="Film címe" formControlName="movieTitle"
+          required
+          [attr.disabled]="readOnly"
+        >
+        <mat-option *ngFor="let movie of movies" [value]="movie.title">
+          {{movie.title}}
+        </mat-option>
+        </mat-select>
+        <mat-error *ngIf="movieTitle.invalid && (movieTitle.dirty || movieTitle.touched) && movieTitle.errors.required">
+          A film címének megadása kötelező!
+        </mat-error>
+      </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Terem neve" formControlName="roomName"
+              required   [attr.disabled]="readOnly"
+            >
+            <mat-option *ngFor="let room of rooms" [value]="room.roomName">
+              {{room.roomName}}
+            </mat-option>
+            </mat-select>
+            <mat-error *ngIf="roomName.invalid && (roomName.dirty || roomName.touched) && roomName.errors.required">
+              A terem nevének megadása kötelező!
+            </mat-error>
+          </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="A foglaló ügyfél neve" formControlName="customerName"
       required
       pattern="^(Dr\.\s|dr\.\s)?[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]{1,}(\s[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí]{1,}){0,}"
-    >
+      [attr.disabled]="readOnlyWhenEdit"
+      >
     <mat-error *ngIf="customerName.invalid && (customerName.dirty || customerName.touched) && customerName.errors.required">
       A név megadása kötelező!
     </mat-error>
@@ -23,6 +49,30 @@
       Az e-mail címnek helyes formátumúnak kell lennie!
     </mat-error>
   </mat-form-field>
+  <mat-form-field>
+      <mat-select placeholder="Szék sorszáma" formControlName="rowNumber"
+      required
+    >
+    <mat-option *ngFor="let chairRowNumber of chairRowNumbers" [value]="chairRowNumber">
+      {{chairRowNumber}}
+    </mat-option>
+    </mat-select>
+    <mat-error *ngIf="rowNumber.invalid && (rowNumber.dirty || rowNumber.touched) && rowNumber.errors.required">
+      A sor megadása kötelező!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="A sorban lévő szék sorszáma" formControlName="columnNumber"
+    required
+  >
+  <mat-option *ngFor="let chairColumnNumber of chairColumnNumbers" [value]="chairColumnNumber">
+    {{chairColumnNumber}}
+  </mat-option>
+  </mat-select>
+  <mat-error *ngIf="columnNumber.invalid && (columnNumber.dirty || columnNumber.touched) && columnNumber.errors.required">
+    A szék számának megadása kötelező!
+  </mat-error>
+</mat-form-field>
   <mat-form-field>
     <mat-select placeholder="Jegy típusa" formControlName="ticketType"
       required
@@ -45,12 +95,10 @@
       A jegy típusának megadása kötelező!
     </mat-error>
   </mat-form-field>
-  <button mat-flat-button color="primary" 
+  <button mat-flat-button 
     type="submit"
     [disabled]="chairForm.invalid"  
   >Mentés</button>
 
 </form>
-{{chair | json}}
-{{chairForm.value | json}}
-{{chairForm.valid | json}}
+

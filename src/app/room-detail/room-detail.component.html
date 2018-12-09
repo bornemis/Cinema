@@ -1,5 +1,6 @@
+<html>
 <h1>A kiválasztott terem adatai</h1>
-
+<div>
 <dl *ngIf="room">
   <dt>Név</dt>
   <dd>{{room.roomName}}</dd>
@@ -12,8 +13,14 @@
 </dl>
 
 <p>
-<a mat-flat-button color="primary" [routerLink]="['/rooms', room.id, 'edit']" *ngIf="showEdit">Szerkesztés</a>
-<button (click)="onFormDelete()" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
+<a mat-flat-button color="primary" [routerLink]="['/rooms', room.id, 'edit']" >Szerkesztés</a>
+<a mat-flat-button color="primary" [routerLink]="['/rooms',room.id,'chairs']" >Foglalások listája ebbe a terembe</a>
+<a mat-flat-button color="primary" [routerLink]="['/rooms',room.id,'screenings']" >Vetítések listája ebbe a terembe</a>
+<a mat-flat-button color="primary" [routerLink]="['/rooms',room.id,'screenings', 'add']" >Vetítés hozzáadása</a>
+<button (click)="onFormDelete()" mat-flat-button color="primary"  >Törlés</button>
+
 </p>
+</div>
+</html>
 
 

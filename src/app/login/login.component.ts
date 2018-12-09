@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     if (success) {
       const url = this.authService.redirectUrl
         ? this.authService.redirectUrl
-        : '/chairs';
+        : '/movies'/*'/chairs'*/;
       this.router.navigate([url])
     } else {
       this.message = 'Hibás felhasználónév vagy jelszó!'

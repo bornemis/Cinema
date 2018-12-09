@@ -12,7 +12,7 @@ export class RoomFormComponent implements OnInit, OnChanges {
     roomName: ['', [Validators.required, Validators.pattern(/^[A-ZÁÉŐÓÚŰÜÖÍ1-9][a-záéőóúűüöí0-9-]*(\s[A-ZÁÉŐÓÚŰÜÖÍ1-9][a-záéőóúűüöí0-9-]*)*/)]],
     numberOfRows: ['', [Validators.required, Validators.pattern(/^[1-9][0-9]?/)]],
     numberOfColumns: ['',[Validators.required,Validators.pattern(/^[1-9][0-9]?/)]],
-    availablePlaces: ['',[Validators.required,Validators.pattern(/^[1-9][0-9]{0,1,2}/)]]
+    availablePlaces: ['',[Validators.required,Validators.pattern(/^[1-9][0-9][0-9]?$/)]]
   });
   @Input() room: Room;
   @Output() save = new EventEmitter<Room>();

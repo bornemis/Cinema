@@ -1,0 +1,28 @@
+
+h1{
+    color:green;
+    text-align:center;
+}
+dl{
+    color:white;
+    text-align: center;
+    background-color: black;
+}
+dt{
+    color:green;
+}
+p{
+    text-align: center;
+    color:white;
+    background-color: black;
+}
+a{
+    background-color: green;
+}
+.mat-flat-button{
+    background-color: green;
+}
+div{
+    background-color: black;
+    resize: auto;
+}

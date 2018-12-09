@@ -1,15 +1,31 @@
+
 h2 {
     padding-left: 16px;
     padding-right: 16px;
+    color:green;
   }
-  small mat-icon {
+  small {
     font-size: smaller;
     height: auto;
     width: auto;
+    color:white;
   }
   a.selected {
-    background-color: rgb(0, 81, 255);
+    background-color: green(0, 81, 255);
   }
   button{
     background-color: green;
+    color:white;
   }
+a.buttons{
+  background-color: green;
+    color:white;
+}
+
+h3{
+  color:white;
+}
+div{
+  background-color: black;
+  resize: auto;
+}

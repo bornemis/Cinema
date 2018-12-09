@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { ChairService } from '../chair.service';
+import { AuthService } from '../auth.service';
 import { Chair } from '../chair';
  @Component({
   selector: 'chair-detail',
@@ -13,10 +14,10 @@ export class ChairDetailComponent implements OnInit {
     constructor(
     private route: ActivatedRoute,
     private chairService: ChairService,
-    private router: Router
+    private router: Router,
+    private authService:AuthService
   ) { }
-  @Input() showEdit=true;
-  @Input() showDelete=true;
+
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {

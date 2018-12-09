@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { MovieListComponent } from "../movie-list/movie-list.component";
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
 import { ScreeningListComponent } from '../screening-list/screening-list.component';
@@ -15,30 +14,28 @@ import { RoomEditComponent } from '../room-edit/room-edit.component';
 import { ScreeningEditComponent } from '../screening-edit/screening-edit.component';
 import { AuthGuard } from '../auth.guard';
 import { LoginComponent } from '../login/login.component';
+import {RegisterComponent} from '../register/register.component'
 const routes: Routes = [
   {
     path: '',
-    component: MovieListComponent
-  },
-  {
-    path: 'movies',
-    component: MovieListComponent
-  },
-  {
-    path: 'screenings',
-    component: ScreeningListComponent
-  },
-  {
-    path: 'rooms',
-    component: RoomListComponent,
+    component: MovieListComponent,
     canActivate: [AuthGuard],
     data: {
-      roles: ['ADMIN']
+      roles: ['ADMIN', 'GUEST', 'USER']
     }
   },
   {
-    path: 'chairs',
-    component: ChairListComponent,
+    path: 'movies',
+    component: MovieListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN', 'GUEST', 'USER']
+    }
+  },
+  {
+    
+    path: 'movies/add',
+    component: MovieEditComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -50,41 +47,59 @@ const routes: Routes = [
     }
   },
   {
+    path: 'movies/:id/chairs',
+    component: ChairListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN', 'USER']
+    }
+  },
+  {
     path: 'movies/:id',
-    component: MovieDetailComponent
+    component: MovieDetailComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN', 'GUEST', 'USER']
+    }
+  },
+  {
+    path: 'movies/:id/screenings',
+    component: ScreeningListComponent,
+    canActivate:[AuthGuard],
+    data:{
+      roles: ['GUEST', 'ADMIN', 'USER']
+    }
+  },
+  {
+    path: 'movies/:id/screenings/add',
+    component: ScreeningEditComponent,
+    canActivate:[AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
+  },
+  {
+    path: 'screenings',
+    component: ScreeningListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN', 'GUEST', 'USER']
+    }
+  },
+  {
+    path: 'screenings/add',
+    component: ScreeningEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'screenings/:id',
     component: ScreeningDetailComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'chairs/:id',
-    component: ChairDetailComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'rooms/:id',
-    component: RoomDetailComponent,
     canActivate: [AuthGuard],
     data: {
-      roles: ['ADMIN']
-    }
-  },
-  {
-    path: 'chairs/:id/edit',
-    component: ChairEditComponent,
-    canActivate: [AuthGuard],
-    data: {
-      roles: ['ADMIN']
-    }
-  },
-  {
-    path: 'rooms/:id/edit',
-    component: RoomEditComponent,
-    canActivate: [AuthGuard],
-    data: {
-      roles: ['ADMIN']
+      roles: ['GUEST', 'ADMIN', 'USER']
     }
   },
   {
@@ -96,16 +111,32 @@ const routes: Routes = [
     }
   },
   {
-    path: 'movies/add',
-    component: MovieEditComponent,
+    path: 'screenings/:id/chairs',
+    component: ChairListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN', 'USER']
+    }  
+  },
+  {
+    path: 'screenings/:id/rooms',
+    component: RoomListComponent,
     canActivate: [AuthGuard],
     data: {
       roles: ['ADMIN']
-    }
+    }  
   },
   {
-    path: 'screenings/add',
-    component: ScreeningEditComponent,
+    path: 'screenings/:id/chairs/add',
+    component: ChairEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN', 'USER']
+    }  
+  },
+  {
+    path: 'rooms',
+    component: RoomListComponent,
     canActivate: [AuthGuard],
     data: {
       roles: ['ADMIN']
@@ -120,13 +151,80 @@ const routes: Routes = [
     }
   },
   {
+    path: 'rooms/:id',
+    component: RoomDetailComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
+  },
+  {
+    path: 'rooms/:id/edit',
+    component: RoomEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
+  },
+  {
+    path: 'rooms/:id/chairs',
+    component: ChairListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
+  },
+  {
+    path: 'rooms/:id/screenings',
+    component: ScreeningListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
+  },
+  {
+    path: 'rooms/:id/screenings/add',
+    component: ScreeningEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
+  },
+  {
+    path: 'chairs',
+    component: ChairListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN', 'USER']
+    }
+  },
+ 
+ /* {
     path: 'chairs/add',
     component: ChairEditComponent,
     canActivate: [AuthGuard]
+  },*/
+  
+  {
+    path: 'chairs/:id',
+    component: ChairDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'chairs/:id/edit',
+    component: ChairEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ADMIN']
+    }
   },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   }
 ];
 

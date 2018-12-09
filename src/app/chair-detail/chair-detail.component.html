@@ -1,5 +1,5 @@
 <h1>A kiválasztott foglalás adatai</h1>
-
+<div>
 <dl *ngIf="chair">
   <dt>A foglaló ügyfél neve</dt>
   <dd>{{chair.customerName}}</dd>
@@ -18,6 +18,7 @@
 </dl>
 
 <p>
-<a mat-flat-button color="primary" [routerLink]="['/chairs', chair.id, 'edit']" *ngIf="showEdit">Szerkesztés</a>
-<button (click)="onFormDelete()" mat-flat-button color="primary" *ngIf="showDelete" >Törlés</button>
+<a mat-flat-button color="primary" [routerLink]="['/chairs', chair.id, 'edit']" *ngIf="authService.isAdmin">Szerkesztés</a>
+<button (click)="onFormDelete()" mat-flat-button color="primary" *ngIf="authService.isAdmin">Törlés</button>
 </p>
+</div>
