@@ -177,23 +177,27 @@ További segítséget az Angular CLI használatához az `ng help` parancs kiadá
 
 ### Vendég felület
 
-A vendég felhasználót az oldalra érkezést követően egy üdvözlő üzenet és a bejelentkezésen kívül 2 menüpont fogadja, a filmek és a vetítések.
+A vendég felhasználót az oldalra érkezést követően a a főoldalon moziban épp futó filmek listája fogadják.
 
 A Filmek gombra kattintva kilistázódnak az éppen futó filmek. Megjelenítésre kerül a film címe, rendező, hossza és értékelése. Lehetőség van váltani a moziba érkező filmek megtekintésére, illetve minden film lekérdezésére. Az összes listázása esetén a kettő közti különbséget egy teli (már futó) és üres zöld csillag ábrázolja. Ha rákattintunk egy tetszőleges filmre, részletes leírást kapunk róla egy beágyazott trailer-videóval együtt.
 
 Vetítésre navigálva listázásra kerülnek a vetítések. Ezekre kattintva megjelenek plusz információk arról, hogy melyik teremben lesz és milyen hosszú a film. Megjelenik egy jegy foglalás gomb is, amire vendégként kattintva az oldal elirányít minket a bejelentkező felületre, mivel jegyvásárláshoz be kell jelentkeznünk.
 
+Regisztrálatlan felhasználónak itt van lehetősége regisztrálni. A regisztrációra kattintva csak a felhasználónevét és kétszer a jelszavát kell megadnia.
+
 ### Felhasználó felület
 
-Ez a felület annyiban több, hogy a felhasználó már tud jegyet foglalni, illetve megjelenik 3 plusz új menüelem. Az egyik, csak egy személyes üdvözlőüzenet. A másik kijelentkezés gomb, amire kattintva a felhasználót kilépteti a rendszer. A harmadik, Foglalások gombbal ki lehet listázni minden eddigi foglalást, ezekre kattintva pedig plusz információk jelennek meg erre vonatkozóan, mint például pontos ülőhely, felnőtt/diák, stb..A vetítésekre kattintva lehetőségünk lesz lefoglalni illetve "megvásárolni" jegyet egy form-on keresztül. 
+Ez a felület annyiban több, hogy a felhasználó már tud jegyet foglalni, illetve megjelenik 3 plusz új menüelem. Az egyik, csak egy személyes üdvözlőüzenet. A másik kijelentkezés gomb, amire kattintva a felhasználót kilépteti a rendszer. A harmadik, Foglalások gombbal ki lehet listázni minden eddigi foglalást, ezekre kattintva pedig plusz információk jelennek meg erre vonatkozóan, mint például pontos ülőhely, felnőtt/diák, stb..A vetítésekre kattintva lehetőségünk lesz lefoglalni illetve "megvásárolni" jegyet egy form-on keresztül.
+
+Vetítésre jegyet foglalni többféleképp lehetésges. A filmek kilistázásánál ha egy filmre kattintunk, a lap alján a Vetítések listája gombra kattintva megjelennek az adott filmhez tartozó vetítések, erre, majd a Jegy foglalására kattintva megjelenik a kitöltendő form, előre beillesztve a film címével és a terem nevével. Itt az adatok megadása után létrejön a foglalás. A másik módja, hogy kilistázzuk az összes vetítést és utána megyünk a jegyfoglalásra.
 
 ### Admin felület
 
 Az admin ugyanazon az utakon tudja elérni a login felületet, mint a felhasználó, itt tud belépni az adott admin név-jelszó párossal, hogy el tudja érni az adminisztrátori menüpontokat. Filmek menüpontra kattintva lehetősége van új filmet hozzááadni, itt egy form-on keresztül kell felvinni minden a filmre vonatkozó adatot. A legtöbb mező kitöltése kötelező, ezek nélkül nem engedi a rendszer elmenteni a filmet. 
 
-Vetítések menüpontnál ugyanúgy van lehetőség hozzáadásra. Itt egy film-terem kapcsolatot kell megadni legördülő menüből, illetve időpontot, nyelvet és feliratot. 
+Vetítések menüpontnál ugyanúgy van lehetőség hozzáadásra. Itt egy film-terem kapcsolatot kell megadni legördülő menüből, illetve időpontot, nyelvet és feliratot kell választani. 
 
-Foglalások listázásánál az összes felhasználó foglalása megjelenik.
+Foglalások listázásánál az összes felhasználó foglalása megjelenik. El lehet különíteni a foglalt illetve a már kifizetett jegyeket egymástól.
 
 Ki lehet listázni a termeket egy plusz menü elemmel, hozzá is lehet adni.
 
