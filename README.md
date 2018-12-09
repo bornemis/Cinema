@@ -143,10 +143,24 @@ A chairs táblában az összes adatot csak az admin tudja megnézni, movies táb
 ![Felhasználói funkciók](https://github.com/bornemis/Cinema/blob/master/userUseCase.png)
 ![Vendég funkciók](https://github.com/bornemis/Cinema/blob/master/guestUseCase.png)
 
- ### Kliens oldali fejlesztői környezet bemutatása
+ ## Kliens oldali fejlesztői környezet bemutatása
+ Ezen projekt fejlesztéséhez az [Angular CLI](https://github.com/angular/angular-cli) nevű program 6.2.5 verziója lett használva.
  
  A kliens oldali fejlesztés Visual Studio Code környezetben történt. Felhasználtuk az AngularJS-t, amely egy struktúrális szerkezetet nyújt a dinamikus webes alkalmazásokhoz. Engedélyezi, hogy HTML-t lehessen használni a template-ek nyelvéhez, de ennek a kiterjesztését is, hogy a komponenseket árnyaltabban tudjuk leírni, továbbá a JavaScryptet és a TypeScyptet is, illetve a css-t is. A css a kinézetért felelős, a TypeScrypt, illetve a Javascrypt pedig a logikáért, a html pedig a különböző elemek elrendezéséért a megjelenő felületen.
- 
+
+## Fejlesztői szerver
+
+Futtasuk le az `ng serve` parancsot. A böngésző címsorába másoljuk be a `http://localhost:4200/` szöveget. Ezen az oldalon az aplikáció folyamatosan frissül, ha a háttérben módosítunk valamit. Npm install-lal installálunk minden, a futáshoz kellő komponenst, és npm start-tal elindíthatuk az aplikációnkat.
+## Kódolást segítő parancsok
+
+Használjuk a `ng generate component component-name` parancsot új komponensek létrehozásához, tovább használhatuk az `ng generate directive|pipe|service|class|guard|interface|enum|module` parancsokat, a nevüknek megfelelő elemek létrehozásához.
+
+## Build
+
+Adjuk ki az `ng build` parancsot a parancssorban a proekt build-eléséhez. A build-elt elemek a `dist/` könyvtárba kerülnek. 
+
+## További segítség
+További segítséget az Angular CLI használatához az `ng help` parancs kiadásával kaphatunk, illetve, az [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md) elolvasásával.
  ### Kliens oldali könyvtárszerkezet
  
  ![Kliens oldali könyvtárszerkezet](https://github.com/bornemis/Cinema/blob/master/clientPackageDiagram.png)
@@ -183,34 +197,6 @@ Foglalások listázásánál az összes felhasználó foglalása megjelenik.
 
 Ki lehet listázni a termeket egy plusz menü elemmel, hozzá is lehet adni.
 
-
-# CinemaClient
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.5.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 [h2]: <http://www.h2database.com/html/main.html>
 [JPA]: <https://www.tutorialspoint.com/jpa/>
