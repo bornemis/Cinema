@@ -173,6 +173,44 @@ További segítséget az Angular CLI használatához az `ng help` parancs kiadá
 ![Tervezett filmek listája](https://github.com/bornemis/Cinema/blob/master/movieListPlan.png)
 ![Tervezett új foglalás megvalósítása](https://github.com/bornemis/Cinema/blob/master/createNewLendingPlan.png)
 
+### Kliens oldali szolgáltatások
+
+Autentikáció (auth.service.ts)
+-Login eljárás: A UserControllerben található /users/login végponton POST-olja a username és password által generált tokent, ha a kapott válaszból érkező user admin, akkor adminként léptetjük be (this.isADmin=true), ha nem, akkor felhasználóként. Ha hiba keletkezik a bejelentkezés sikertelen és false-al tér vissza az eljárás.
+-Logout eljárás: Egyszerűen kilépteti a usert, minden szükséges változót átállít.
+-Register eljárás: A /users/register végpontra posztolja a kért felhasználónevet és jelszót, a controllerben létrejön a felhasználó az adott jelszóval. Kivétel keletkezhet, ha már létezik adott nevű felhasználó.
+
+Foglalások (char.service.ts)
+A kérések a /chairs végponton, vagy azon belül mennek végbe, a kezelésük a ChairsController osztályban található.
+-getChairs(): egy get kérés az összes foglalásról, Chair[] az érték.e
+-getChair(): paramétere egy id, /id végpontról lekéri az adott azonosítójú foglalást.
+-modifyChair(): put kérés a /id végponton, ahol adminként a foglalást tudjuk módosítani.
+-deleteChair(): szintén adott id alapján delete kérés, adminként lehetőségünk van foglalás törlésére.
+
+Filmek (movie.service.ts)
+A kérések a /movies végponton, vagy azon belül mennek végbe, a kezelésük a MovieController osztályban található.
+-getMovies(): visszatérési értéke Movie[], vissza kapjuk az adatbázisban lévő filmeket.
+-getMovie(): /id-n keresztül visszakapunk egy konkrét filmet.
+-modifyMovie(): /id és PUT, admin tudja módosítani a film valamely paraméterét.
+-deleteMovie(): /id DELETE, film törlése.
+-getScreeningsToMovie(): /id/screenings, GET végponton megkapja a filmhez tartozó vetítéseket (Screening[]).
+-addScreeningToMovie(): POST /id/screenings, a paraméterként átadott Screeninghez hozzáadja az adott id-val rendelkező filmet.
+-getChairsToMovie(): GET /id/chairs, visszaadja a filmhez tartozó foglalásokat(Chair).
+
+Termek (room.service.ts)
+A kérések a /rooms végponton, vagy azon belül mennek végbe, kezelésük a RoomControllerben található.
+-getRooms(): GET kérés, értéke Room[], az összes terem.
+-getRoom(): /id alapján az adott terem.
+-modifyRoom(): PUT /id, a terem azonosítóját lehet megváltoztatni.
+-addRoom(): POST, létrehozza a paraméterben átadott Room-ot.
+-deleteRoom(): DELETE, /id, törli az adott id-val rendelkező termet.
+-getChairsToRoom(): GET, id/chairs, id alapján Chair[], a teremhez tartozó foglalások.
+-getScreeningsToRoom(): GET, id/screenings, id alapján Screening[], a teremhez tartozó vetítések.
+
+
+
+
+
 ## Felhasználói dokumentáció
 
 ### Vendég felület
