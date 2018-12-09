@@ -159,6 +159,31 @@ A chairs táblában az összes adatot csak az admin tudja megnézni, movies táb
 ![Tervezett filmek listája](https://github.com/bornemis/Cinema/blob/master/movieListPlan.png)
 ![Tervezett új foglalás megvalósítása](https://github.com/bornemis/Cinema/blob/master/createNewLendingPlan.png)
 
+## Felhasználói dokumentáció
+
+### Vendég felület
+
+A vendég felhasználót az oldalra érkezést követően egy üdvözlő üzenet és a bejelentkezésen kívül 2 menüpont fogadja, a filmek és a vetítések.
+
+A Filmek gombra kattintva kilistázódnak az éppen futó filmek. Megjelenítésre kerül a film címe, rendező, hossza és értékelése. Lehetőség van váltani a moziba érkező filmek megtekintésére, illetve minden film lekérdezésére. Az összes listázása esetén a kettő közti különbséget egy teli (már futó) és üres zöld csillag ábrázolja. Ha rákattintunk egy tetszőleges filmre, részletes leírást kapunk róla egy beágyazott trailer-videóval együtt.
+
+Vetítésre navigálva listázásra kerülnek a vetítések. Ezekre kattintva megjelenek plusz információk arról, hogy melyik teremben lesz és milyen hosszú a film. Megjelenik egy jegy foglalás gomb is, amire vendégként kattintva az oldal elirányít minket a bejelentkező felületre, mivel jegyvásárláshoz be kell jelentkeznünk.
+
+### Felhasználó felület
+
+Ez a felület annyiban több, hogy a felhasználó már tud jegyet foglalni, illetve megjelenik 3 plusz új menüelem. Az egyik, csak egy személyes üdvözlőüzenet. A másik kijelentkezés gomb, amire kattintva a felhasználót kilépteti a rendszer. A harmadik, Foglalások gombbal ki lehet listázni minden eddigi foglalást, ezekre kattintva pedig plusz információk jelennek meg erre vonatkozóan, mint például pontos ülőhely, felnőtt/diák, stb..A vetítésekre kattintva lehetőségünk lesz lefoglalni illetve "megvásárolni" jegyet egy form-on keresztül. 
+
+### Admin felület
+
+Az admin ugyanazon az utakon tudja elérni a login felületet, mint a felhasználó, itt tud belépni az adott admin név-jelszó párossal, hogy el tudja érni az adminisztrátori menüpontokat. Filmek menüpontra kattintva lehetősége van új filmet hozzááadni, itt egy form-on keresztül kell felvinni minden a filmre vonatkozó adatot. A legtöbb mező kitöltése kötelező, ezek nélkül nem engedi a rendszer elmenteni a filmet. 
+
+Vetítések menüpontnál ugyanúgy van lehetőség hozzáadásra. Itt egy film-terem kapcsolatot kell megadni legördülő menüből, illetve időpontot, nyelvet és feliratot. 
+
+Foglalások listázásánál az összes felhasználó foglalása megjelenik.
+
+Ki lehet listázni a termeket egy plusz menü elemmel, hozzá is lehet adni.
+
+
 # CinemaClient
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.5.
