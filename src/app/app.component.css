@@ -1,0 +1,29 @@
+
+h1{
+    text-align:center;
+    text-decoration-style: wavy;
+    color:green;
+    font-size: 4.5em;
+    font-style:italic;
+    letter-spacing: 1.5em;
+    font-family: cursive;
+    height: 1.0em;
+    background-color:black;
+}
+
+html{
+    background-color: black;
+    resize: auto;
+}
+.mat-toolbar{
+    justify-content: center;
+    background-color: black;
+}
+button{
+    margin:2.0em;
+    font-size:1.0em;
+}
+div{
+    background-color: black;
+    resize: auto;
+}

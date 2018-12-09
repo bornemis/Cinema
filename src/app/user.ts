@@ -1,5 +1,5 @@
 export class User {
-    id=null;
+    id: number;
     userName: string='';
     password: string='';
     enabled: boolean=true;

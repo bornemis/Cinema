@@ -7,6 +7,12 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
     'Authorization': '',
   })
 };
+export const guestHttpOptions={
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json',
+    'Authorization': 'Basic YWRtaW46cGFzc3dvcmQ=', // admin/password
+  })
+}
  @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +21,7 @@ export class AuthService {
    isAdmin=false;
   user: User;
   redirectUrl: string;
+  bcryptPassword: string;
    private usersUrl = 'http://localhost:8080/users';
    constructor(
     private http: HttpClient
@@ -49,4 +56,24 @@ export class AuthService {
     this.user = null;
     this.redirectUrl = null;
   }
+    async register(user: User): Promise<User> {
+  //  const token = btoa(`${username}:${password}`);
+  //  this.bcryptPassword=btoa(password);
+    console.log(this.bcryptPassword);
+    httpOptions.headers =
+      httpOptions.headers.set(
+        'Authorization',
+        'Basic YWRtaW46cGFzc3dvcmQ='
+      );
+    try {
+        return this.http.post<User>(
+          `${this.usersUrl}/register`,
+          user,
+          httpOptions
+        ).toPromise();
+      } catch (e) {
+        console.log('Hiba a regisztráláskor!', e);
+        return null;
+      }
+    }
  }

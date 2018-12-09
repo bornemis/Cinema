@@ -1,45 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Room } from './room';
+import { Chair } from './chair';
+import { Screening } from './screening';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
- const httpOptions = {
-  headers: new HttpHeaders({ 
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic YWRtaW46cGFzc3dvcmQ=', // admin/password
-  })
-};
+import { httpOptions } from "./auth.service";
+
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
   private roomUrl = 'http://localhost:8080/rooms';
-  rooms: Room[] = [
-    {
-      id: 1,
-      roomName: '16',
-      numberOfRows: 4,
-      numberOfColumns: 10,
-      availablePlaces: 40
-    },
-    {
-      id: 2,
-      roomName: '20',
-      numberOfRows: 8,
-      numberOfColumns: 10,
-      availablePlaces: 80
-    },{
-      id: 3,
-      roomName: 'Retro',
-      numberOfRows: 7,
-      numberOfColumns: 8,
-      availablePlaces: 56
-    },{
-      id: 4,
-      roomName: '13',
-      numberOfRows: 13,
-      numberOfColumns: 13,
-      availablePlaces: 169
-    }
-  ]
+
   constructor(private http: HttpClient) { }
   getRooms(): Promise<Room[]> {
     return this.http.get<Room[]>(
@@ -74,5 +45,11 @@ export class RoomService {
       `${this.roomUrl}/${id}`,
       httpOptions
     ).toPromise();
+  }
+  getChairsToRoom(id: number){
+    return this.http.get<Chair[]>( `${this.roomUrl}/${id}/chairs`, httpOptions).toPromise();
+  }
+  getScreeningsToRoom(id: number){
+    return this.http.get<Screening[]>( `${this.roomUrl}/${id}/screenings`, httpOptions).toPromise();
   }
 }

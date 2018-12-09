@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Movie } from './movie';
+import { Screening } from './screening';
+import { Chair } from './chair';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-const httpOptions = {
-  headers: new HttpHeaders({ 
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic YWRtaW46cGFzc3dvcmQ=', // admin/password
-  })
-};
+import { guestHttpOptions } from "./auth.service";
+import { httpOptions } from "./auth.service";
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,14 +16,14 @@ export class MovieService {
   getMovies(): Promise<Movie[]> {
     return this.http.get<Movie[]>(
       this.movieUrl,
-      httpOptions
+      guestHttpOptions
     ).toPromise();
   }
 
   getMovie(id: number): Promise<Movie> {
     return this.http.get<Movie>(
       `${this.movieUrl}/${id}`,
-      httpOptions
+      guestHttpOptions
     ).toPromise();
   }
 
@@ -47,5 +47,16 @@ export class MovieService {
       httpOptions
     ).toPromise();
   }
+  getScreeningsToMovie(id: number){
+    return this.http.get<Screening[]>(`${this.movieUrl}/${id}/screenings`,
+    guestHttpOptions).toPromise();
+  }
+  addScreeningToMovie(id: number, screening: Screening){
+      return this.http.post<Screening>(`${this.movieUrl}/${id}/screenings`,screening, httpOptions).toPromise();
+  }
+  getChairsToMovie(id:number){
+      return this.http.get<Chair[]>(`${this.movieUrl}/${id}/chairs`, httpOptions).toPromise();
+  }
+ 
   }
 

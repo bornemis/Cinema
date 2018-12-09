@@ -1,69 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Screening } from './screening';
+import { Chair } from './chair';
+import { Room } from './room';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
- const httpOptions = {
-  headers: new HttpHeaders({ 
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic YWRtaW46cGFzc3dvcmQ=', // admin/password
-  })
-};
+import { guestHttpOptions } from "./auth.service";
+import { httpOptions } from "./auth.service";
 @Injectable({
   providedIn: 'root'
 })
 export class ScreeningService {
   private screeningUrl = 'http://localhost:8080/screenings';
-  screenings: Screening[] = [
-    {
-      id: 1,
-      movieTitle: "Micsoda nő",
-      roomName: "16",
-      startTime: '13:30',
-      movieDurationInMin: 125,
-      dType: "2D",
-      screeningLanguage: 'ENG',
-      subscription: 'HUN',
-    },
-    {
-      id: 2,
-      movieTitle: "Peppermint: A bosszú angyala",
-      roomName: "20",
-      startTime: '17:00',
-      movieDurationInMin: 101,
-      dType: "3D",
-      screeningLanguage: 'HUN',
-      subscription: 'NONE',
-    },{
-        id: 3,
-        movieTitle: "A Keresztapa",
-        roomName: "20",
-        startTime: '20:30',
-        movieDurationInMin: 125,
-        dType: "2D",
-        screeningLanguage: 'ENG',
-        subscription: 'NONE',
-    },{
-        id: 4,
-        movieTitle: "A Keresztapa",
-        roomName: "16",
-        startTime: '15:30',
-        movieDurationInMin: 125,
-        dType: "2D",
-        screeningLanguage: 'HUN',
-        subscription: 'ENG',
-    }
-  ]
   constructor(private http: HttpClient) { }
   getScreenings(): Promise<Screening[]> {
     return this.http.get<Screening[]>(
       this.screeningUrl,
-      httpOptions
+      guestHttpOptions
     ).toPromise();
   }
 
   getScreening(id: number): Promise<Screening> {
     return this.http.get<Screening>(
       `${this.screeningUrl}/${id}`,
-      httpOptions
+      guestHttpOptions
     ).toPromise();
   }
 
@@ -84,6 +42,25 @@ export class ScreeningService {
   deleteScreening(id:number){
     return this.http.delete<Screening>(
       `${this.screeningUrl}/${id}`,
+      httpOptions
+    ).toPromise();
+  }
+  getChairsToScreening(id:number){
+    return this.http.get<Chair[]>(
+      `${this.screeningUrl}/${id}/chairs`,
+      httpOptions
+    ).toPromise();
+  }
+  getRoomsToScreening(id:number){
+    return this.http.get<Room[]>(
+      `${this.screeningUrl}/${id}/rooms`,
+      httpOptions
+    ).toPromise();
+  }
+  addChairToScreening(id:number, chair: Chair){
+    return this.http.post<Chair>(
+      `${this.screeningUrl}/${id}/chairs`,
+      chair,
       httpOptions
     ).toPromise();
   }

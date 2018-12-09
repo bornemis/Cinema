@@ -2,13 +2,13 @@ export class Movie {
     id=null;
     title: string = '';
     director: string = '';
-    movieType: string[];
+    movieType: string='';
     ageLimit: string='';
     plot: string = '';
     releaseDate= '';
     durationInMin: number=0;
-    status: string='';
+    status='COMING';
     posterLink: string = '';
     trailerLink: string='';
-    rating: string='';
+    rating='Meg nem ertekelt.';
   }

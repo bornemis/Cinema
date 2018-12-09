@@ -1,3 +1,4 @@
+<html>
 <h1>MOZI</h1>
 <mat-toolbar color="primary">
   <button mat-button routerLink="/movies">
@@ -13,8 +14,10 @@
   </div>
   <div *ngIf="!authService.isLoggedIn">
     <button mat-button routerLink="/login">Bejelentkezés</button>
+    <button mat-button routerLink="/register">Regisztráció</button>
   </div>
   </mat-toolbar>
 
 <router-outlet></router-outlet>
+</html>
 

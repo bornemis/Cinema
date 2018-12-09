@@ -4,8 +4,8 @@ export class Screening {
     movieTitle: string='';
     roomName: string='';
     startTime: string='';
+    screeningDate: string='';
     movieDurationInMin: number=0;
-    dType: string='';
     screeningLanguage: string='';
     subscription: string='';
 }

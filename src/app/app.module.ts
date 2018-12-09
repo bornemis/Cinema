@@ -14,13 +14,11 @@ import {
   MatInputModule,
   MatSelectModule
 } from '@angular/material';
-import { MainPageComponent } from './main-page/main-page.component';
 import { RoutingModule } from './routing/routing.module';
 import { MovieStatusFilterComponent } from './movie-status-filter/movie-status-filter.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { ScreeningListComponent } from './screening-list/screening-list.component';
-import { DFilterComponent } from './d-filter/d-filter.component';
 import { RoomListComponent } from './room-list/room-list.component';
 import { ChairListComponent } from './chair-list/chair-list.component';
 import { ChairStatusFilterComponent } from './chair-status-filter/chair-status-filter.component';
@@ -38,16 +36,15 @@ import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { ChairDetailComponent } from './chair-detail/chair-detail.component';
 import { ScreeningDetailComponent } from './screening-detail/screening-detail.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent,
     MovieStatusFilterComponent,
     MovieListComponent,
     ScreeningListComponent,
-    DFilterComponent,
     RoomListComponent,
     ChairListComponent,
     ChairStatusFilterComponent,
@@ -63,7 +60,8 @@ import { LoginComponent } from './login/login.component';
     RoomDetailComponent,
     ChairDetailComponent,
     ScreeningDetailComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

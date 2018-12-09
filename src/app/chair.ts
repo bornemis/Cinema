@@ -7,5 +7,5 @@ export class Chair {
     customerName: string='';
     customerEmail: string='';
     ticketType: string='';
-    status: string='';
+    status='RENTED';
 }

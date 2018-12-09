@@ -1,28 +1,41 @@
 <form [formGroup]="screeningForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-select placeholder="Film címe" formControlName="movieTitle"
+          required [attr.disabled]="readOnly"
+        >
+        <mat-option *ngFor="let movie of movies" [value]="movie.title">
+          {{movie.title}}
+        </mat-option>
+        </mat-select>
+        <mat-error *ngIf="movieTitle.invalid && (movieTitle.dirty || movieTitle.touched) && movieTitle.errors.required">
+          A film címének megadása kötelező!
+        </mat-error>
+      </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Film címe" formControlName="movieTitle"
+    <mat-select placeholder="Terem neve" formControlName="roomName"
       required
-      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ][a-záéőóúűüöí0-9-]+(\s[A-ZÁÉŐÓÚŰÜÖÍa-záéőóúűüöí0-9-]+)*(\s[1-9][0-9]*\.?)?$"
+      [attr.disabled]="readOnly2"
     >
-    <mat-error *ngIf="movieTitle.invalid && (movieTitle.dirty || movieTitle.touched) && movieTitle.errors.required">
-      A film címének megadása kötelező!
-    </mat-error>
-    <mat-error *ngIf="movieTitle.invalid && (movieTitle.dirty || movieTitle.touched) && movieTitle.errors.pattern">
-      A film címének helyes formátumúnak kell lennie!
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Terem neve" formControlName="roomName"
-      required
-      pattern="^[A-ZÁÉŐÓÚŰÜÖÍ1-9][a-záéőóúűüöí0-9-]*(\s[A-ZÁÉŐÓÚŰÜÖÍ1-9][a-záéőóúűüöí0-9-]*)*$"
-    >
+    <mat-option *ngFor="let room of rooms" [value]="room.roomName">
+      {{room.roomName}}
+    </mat-option>
+    </mat-select>
     <mat-error *ngIf="roomName.invalid && (roomName.dirty || roomName.touched) && roomName.errors.required">
       A terem nevének megadása kötelező!
     </mat-error>
-    <mat-error *ngIf="roomName.invalid && (roomName.dirty || roomName.touched) && roomName.errors.pattern">
-      A terem nevének helyes formátumúnak kell lennie!
-    </mat-error>
   </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Vetítés dátuma" formControlName="screeningDate"
+        required
+        pattern="^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$"
+      >
+      <mat-error *ngIf="screeningDate.invalid && (screeningDate.dirty || screeningDate.touched) && screeningDate.errors.required">
+        A vetítés dátumának megadása kötelező!
+      </mat-error>
+      <mat-error *ngIf="screeningDate.invalid && (screeningDate.dirty || screeningDate.touched) && screeningDate.errors.pattern">
+        A vetítés dátumának helyes formátumúnak kell lennie!
+      </mat-error>
+    </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Vetítés kezdete" formControlName="startTime"
       required
@@ -39,7 +52,8 @@
     <input matInput placeholder="Időtartam" formControlName="movieDurationInMin"
       required
       pattern="^[1-9]\d{1,2}$"
-    >
+      [attr.disabled]="readOnly"
+>
     <mat-error *ngIf="movieDurationInMin.invalid && (movieDurationInMin.dirty || movieDurationInMin.touched) && movieDurationInMin.errors.required">
       Az időtartam megadása kötelező!
     </mat-error>
@@ -47,18 +61,6 @@
       Az időtartamnak helyes formátumúnak kell lennie!
     </mat-error>
   </mat-form-field>
-  <mat-form-field>
-      <mat-select placeholder="A vetítés fajtája" formControlName="dType"
-        required
-      >
-        <mat-option value="2D">2D</mat-option>
-        <mat-option value="3D">3D</mat-option>
-        <mat-option value="4DX">4DX</mat-option>
-      </mat-select>
-      <mat-error *ngIf="dType.invalid && (dType.dirty || dType.touched) && dType.errors.required">
-        A vetítés fajtájának megadása kötelező!
-      </mat-error>
-    </mat-form-field>
       <mat-form-field>
     <mat-select placeholder="Nyelv" formControlName="screeningLanguage"
       required
@@ -82,12 +84,10 @@
         A felirat megadása kötelező!
       </mat-error>
     </mat-form-field>
-  <button mat-flat-button color="primary" 
+  <button mat-flat-button 
     type="submit"
     [disabled]="screeningForm.invalid"  
   >Mentés</button>
 
 </form>
-{{screening | json}}
-{{screeningForm.value | json}}
-{{screeningForm.valid | json}}
+
